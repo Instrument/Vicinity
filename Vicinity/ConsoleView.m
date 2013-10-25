@@ -45,7 +45,7 @@
     NSString *output = [[NSString alloc] initWithFormat:formatString arguments:args];
     va_end(args);
     
-    outputTextField.text = [NSString stringWithFormat:@"%@%@\n", outputTextField.text, output];
+    outputTextField.text = [NSString stringWithFormat:@"%@\n%@", output,outputTextField.text];
 }
 
 @end
