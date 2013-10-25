@@ -15,21 +15,22 @@
 
 - (id)init
 {
-    NSLog(@"-- pre-init --: %p", outputTextField);
+ 
     if ((self = [super init])) {
-        NSLog(@"-- post-init-- %p", outputTextField);
+ 
     }
     return self;
 }
 
 - (id)initWithFrame:(CGRect)frame
 {
-    NSLog(@"-- pre-initWithFrame-- %p", outputTextField);
+ 
     if ((self = [super initWithFrame:frame])) {
-        NSLog(@"-- post-initWithFrame-- %p", outputTextField);
+ 
         outputTextField = [[UITextView alloc] initWithFrame:frame];
         outputTextField.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
         outputTextField.font = [UIFont fontWithName:@"Courier" size:12.0f];
+        outputTextField.editable = NO;
         [self addSubview:outputTextField];
         
         
