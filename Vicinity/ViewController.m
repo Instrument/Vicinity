@@ -98,13 +98,17 @@
     [consoleView logStringWithFormat:@"did enter region: %@", beaconRegion.proximityUUID];
     
     // used for ranging beacons once they are near
-    //    [locationManager startRangingBeaconsInRegion:beaconRegion];
+    [locationManager startRangingBeaconsInRegion:beaconRegion];
+    [consoleView logStringWithFormat:@"starting to range beacon"];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
 {
     CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
     [consoleView logStringWithFormat:@"did exit region: %@", beaconRegion.proximityUUID];
+
+    [locationManager stopRangingBeaconsInRegion:beaconRegion];
+    [consoleView logStringWithFormat:@"stopping range of beacon"];
 }
 
 - (void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region
