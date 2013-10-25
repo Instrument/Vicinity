@@ -81,7 +81,8 @@
                inRegion:(CLBeaconRegion *)region
 {
     CLBeacon *nearestBeacon = [beacons firstObject];
-    [consoleView logStringWithFormat:@"nearestBeacon proximity: %@", nearestBeacon.proximityString];
+    if (nearestBeacon)
+        [consoleView logStringWithFormat:@"nearestBeacon proximity: %@", nearestBeacon.proximityString];
 }
 
 - (void)locationManager:(CLLocationManager *)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
@@ -96,10 +97,6 @@
 {
     CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
     [consoleView logStringWithFormat:@"did enter region: %@", beaconRegion.proximityUUID];
-    
-    // used for ranging beacons once they are near
-    [locationManager startRangingBeaconsInRegion:beaconRegion];
-    [consoleView logStringWithFormat:@"starting to range beacon"];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
@@ -143,8 +140,14 @@
     }
     
     CLBeaconRegion *beaconRegion = [self beacon];
+    
+    // used for crossing region boundry
     [locationManager startMonitoringForRegion:beaconRegion];
     [consoleView logStringWithFormat:@"starting detection..."];
+    
+    // used for ranging beacons once they are near
+    [locationManager startRangingBeaconsInRegion:beaconRegion];
+    [consoleView logStringWithFormat:@"starting to range beacon"];
 }
 
 - (void)startBluetoothBroadcast
