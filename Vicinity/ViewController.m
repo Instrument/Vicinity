@@ -54,9 +54,6 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    locationManager = [[CLLocationManager alloc] init];
-    locationManager.delegate = self;
 
 }
 
@@ -93,10 +90,15 @@
     [consoleView logStringWithFormat:@"Error with beacon region: %@ - %@", region, [error localizedDescription]];
 }
 
+
+
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
 {
     CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
     [consoleView logStringWithFormat:@"did enter region: %@", beaconRegion.proximityUUID];
+    
+    // used for ranging beacons once they are near
+    //    [locationManager startRangingBeaconsInRegion:beaconRegion];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
@@ -131,17 +133,29 @@
 
 - (void)startDetectingBeacons
 {
+    if (!locationManager) {
+        locationManager = [[CLLocationManager alloc] init];
+        locationManager.delegate = self;
+    }
+    
     CLBeaconRegion *beaconRegion = [self beacon];
     [locationManager startMonitoringForRegion:beaconRegion];
-
-    // used for ranging beacons once they are near
-//    [locationManager startRangingBeaconsInRegion:beaconRegion];
+    [consoleView logStringWithFormat:@"starting detection..."];
 }
 
 - (void)startBluetoothBroadcast
 {
-    // Create the peripheral manager.
-    peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:nil];
+    // start broadcasting if it's stopped
+    if (!peripheralManager)
+        peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:nil];
+    
+    // stop state if it's started
+    if (peripheralManager.isAdvertising) {
+        [consoleView logStringWithFormat:@"Stopping broadcast"];
+        [peripheralManager stopAdvertising];
+        peripheralManager = nil;
+    }
+    
 }
 
 - (void)startAdvertising
