@@ -11,8 +11,9 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "EasyLayout.h"
 #import "ButtonMaker.h"
+#import "CLBeacon+Ext.h"
 
-@interface ViewController () <CBPeripheralManagerDelegate>
+@interface ViewController () <CBPeripheralManagerDelegate, CLLocationManagerDelegate>
 
 @end
 
@@ -20,6 +21,9 @@
 {
     UIButton *broadcastButton;
     UIButton *detectButton;
+    
+    CLLocationManager *locationManager;
+    CBPeripheralManager *peripheralManager;
 }
 
 - (void)viewDidLoad
@@ -43,26 +47,110 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+
 }
 
 #pragma mark - CBPeripheralManagerDelegate
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
 {
+    NSLog(@"-- bluetooth state changed: %d", peripheral.state);
+    
+    if (peripheral.state == CBPeripheralManagerStatePoweredOn) {
+        [self startAdvertising];
+    }
+}
 
+- (void)peripheralManagerDidStartAdvertising:(CBPeripheralManager *)peripheral error:(NSError *)error
+{
+    if (error)
+        NSLog(@"error starting advertising: %@", [error localizedDescription]);
+    else
+        NSLog(@"did start advertising");
+}
+#pragma mark -
+
+#pragma mark - CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons
+               inRegion:(CLBeaconRegion *)region
+{
+    CLBeacon *nearestBeacon = [beacons firstObject];
+    NSLog(@"nearestBeacon proximity: %@", nearestBeacon.proximityString);
+}
+
+- (void)locationManager:(CLLocationManager *)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
+              withError:(NSError *)error
+{
+    NSLog(@"Error with beacon region: %@ - %@", region, [error localizedDescription]);
+}
+
+- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
+{
+    CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
+    NSLog(@"did enter region: %@", beaconRegion.proximityUUID);
+}
+
+- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
+{
+    CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
+    NSLog(@"did exit region: %@", beaconRegion.proximityUUID);
+}
+
+- (void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region
+              withError:(NSError *)error
+{
+    CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
+    NSLog(@"Error while monitoring region: %@ - error: %@", beaconRegion.proximityUUID, [error localizedDescription]);
 }
 #pragma mark -
 
 - (void)startBroadcasting:(UIButton *)button
 {
+    if (![self canBroadcast])
+        return;
     
+    [self startBluetoothBroadcast];
 }
 
 - (void)startDetecting:(UIButton *)button
 {
+    if (![self canMonitorBeacons])
+        return;
     
+    [self startDetectingBeacons];
 }
 
-- (void)startBluetooth
+- (void)startDetectingBeacons
+{
+
+    CLBeaconRegion *beaconRegion = [self beacon];
+    [locationManager startMonitoringForRegion:beaconRegion];
+
+    // used for ranging beacons once they are near
+//    [locationManager startRangingBeaconsInRegion:beaconRegion];
+}
+
+- (void)startBluetoothBroadcast
+{
+    
+    // Create the peripheral manager.
+    peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:nil];
+}
+
+- (void)startAdvertising
+{
+    CLBeaconRegion *beaconRegion = [self beacon];
+    
+    // Create a dictionary of advertisement data.
+    NSDictionary *beaconPeripheralData = [beaconRegion peripheralDataWithMeasuredPower:nil];
+    
+    // Start advertising your beacon's data.
+    [peripheralManager startAdvertising:beaconPeripheralData];
+}
+
+- (CLBeaconRegion *)beacon
 {
     NSUUID *proximityUUID = [[NSUUID alloc]
                              initWithUUIDString:@"CB284D88-5317-4FB4-9621-C5A3A49E6155"];
@@ -71,14 +159,32 @@
                                     initWithProximityUUID:proximityUUID
                                     identifier:@"com.weareinstrument.dawnsipadmini"];
     
+    return beaconRegion;
+}
+
+- (BOOL)canBroadcast
+{
+    CBPeripheralManagerAuthorizationStatus status = [CBPeripheralManager authorizationStatus];
     
-    // Create a dictionary of advertisement data.
-    NSDictionary *beaconPeripheralData = [beaconRegion peripheralDataWithMeasuredPower:nil];
+    BOOL enabled = (status == CBPeripheralManagerAuthorizationStatusAuthorized ||
+                    status == CBPeripheralManagerAuthorizationStatusNotDetermined);
     
-    // Create the peripheral manager.
-    CBPeripheralManager *peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:nil];
+    if (!enabled)
+        NSLog(@"bluetooth not authorized");
     
-    // Start advertising your beacon's data.
-    [peripheralManager startAdvertising:beaconPeripheralData];
+    return enabled;
+}
+
+- (BOOL)canMonitorBeacons
+{
+    BOOL enabled = [CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]];
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+    BOOL allowed = (status == kCLAuthorizationStatusAuthorized || status == kCLAuthorizationStatusNotDetermined);
+    
+    if (!enabled || !allowed)
+        NSLog(@"Cannot monitor beacons: [%d,%d]", enabled, status);
+    
+    
+    return enabled && allowed;
 }
 @end
