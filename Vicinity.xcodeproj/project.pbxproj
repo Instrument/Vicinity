@@ -24,6 +24,7 @@
 		3509BA0F1819DB330093F714 /* libEasyLayoutLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3509BA071819D66B0093F714 /* libEasyLayoutLibrary.a */; };
 		351FBBEC181AD15800299A5A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBBEA181AD15800299A5A /* Default-568h@2x.png */; };
 		351FBBF0181ADE9D00299A5A /* CLBeacon+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 351FBBEF181ADE9D00299A5A /* CLBeacon+Ext.m */; };
+		351FBBF4181AFC9C00299A5A /* ConsoleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 351FBBF3181AFC9C00299A5A /* ConsoleView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,8 @@
 		351FBBEA181AD15800299A5A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Vicinity/Default-568h@2x.png"; sourceTree = "<group>"; };
 		351FBBEE181ADE9D00299A5A /* CLBeacon+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CLBeacon+Ext.h"; path = "Vicinity/CLBeacon+Ext.h"; sourceTree = "<group>"; };
 		351FBBEF181ADE9D00299A5A /* CLBeacon+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CLBeacon+Ext.m"; path = "Vicinity/CLBeacon+Ext.m"; sourceTree = "<group>"; };
+		351FBBF2181AFC9C00299A5A /* ConsoleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleView.h; sourceTree = "<group>"; };
+		351FBBF3181AFC9C00299A5A /* ConsoleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +152,7 @@
 		3509B9871819C0E70093F714 /* Vicinity */ = {
 			isa = PBXGroup;
 			children = (
+				351FBBF1181AFC7E00299A5A /* Views */,
 				3509B9901819C0E70093F714 /* AppDelegate.h */,
 				3509B9911819C0E70093F714 /* AppDelegate.m */,
 				3509B9991819C0E70093F714 /* ViewController.h */,
@@ -211,6 +215,15 @@
 				351FBBEF181ADE9D00299A5A /* CLBeacon+Ext.m */,
 			);
 			name = Extension;
+			sourceTree = "<group>";
+		};
+		351FBBF1181AFC7E00299A5A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				351FBBF2181AFC9C00299A5A /* ConsoleView.h */,
+				351FBBF3181AFC9C00299A5A /* ConsoleView.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -334,6 +347,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				351FBBF4181AFC9C00299A5A /* ConsoleView.m in Sources */,
 				351FBBF0181ADE9D00299A5A /* CLBeacon+Ext.m in Sources */,
 				3509B98E1819C0E70093F714 /* main.m in Sources */,
 				3509B9921819C0E70093F714 /* AppDelegate.m in Sources */,
