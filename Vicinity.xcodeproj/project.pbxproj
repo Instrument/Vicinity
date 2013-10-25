@@ -19,6 +19,10 @@
 		3509B9A61819C0E70093F714 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3509B9851819C0E70093F714 /* UIKit.framework */; };
 		3509B9AE1819C0E70093F714 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3509B9AC1819C0E70093F714 /* InfoPlist.strings */; };
 		3509B9B01819C0E70093F714 /* VicinityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3509B9AF1819C0E70093F714 /* VicinityTests.m */; };
+		3509B9BA1819C3AE0093F714 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3509B9B91819C3AE0093F714 /* CoreLocation.framework */; };
+		3509B9BC1819C61B0093F714 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3509B9BB1819C61B0093F714 /* CoreBluetooth.framework */; };
+		3509BA0F1819DB330093F714 /* libEasyLayoutLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3509BA071819D66B0093F714 /* libEasyLayoutLibrary.a */; };
+		351FBBEC181AD15800299A5A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBBEA181AD15800299A5A /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +32,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = 3509B97D1819C0E70093F714;
 			remoteInfo = Vicinity;
+		};
+		3509BA061819D66B0093F714 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3509BA011819D66B0093F714 /* EasyLayoutLibrary.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3509B9C61819CEC80093F714;
+			remoteInfo = EasyLayoutLibrary;
+		};
+		3509BA081819D66B0093F714 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3509BA011819D66B0093F714 /* EasyLayoutLibrary.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3509B9D61819CEC80093F714;
+			remoteInfo = EasyLayoutLibraryTests;
+		};
+		3509BA0A1819D6830093F714 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3509BA011819D66B0093F714 /* EasyLayoutLibrary.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3509B9C51819CEC80093F714;
+			remoteInfo = EasyLayoutLibrary;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -49,6 +74,10 @@
 		3509B9AB1819C0E70093F714 /* VicinityTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VicinityTests-Info.plist"; sourceTree = "<group>"; };
 		3509B9AD1819C0E70093F714 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3509B9AF1819C0E70093F714 /* VicinityTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VicinityTests.m; sourceTree = "<group>"; };
+		3509B9B91819C3AE0093F714 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		3509B9BB1819C61B0093F714 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		3509BA011819D66B0093F714 /* EasyLayoutLibrary.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EasyLayoutLibrary.xcodeproj; path = ../EasyLayout/EasyLayoutLibrary.xcodeproj; sourceTree = "<group>"; };
+		351FBBEA181AD15800299A5A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Vicinity/Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +85,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3509BA0F1819DB330093F714 /* libEasyLayoutLibrary.a in Frameworks */,
+				3509B9BC1819C61B0093F714 /* CoreBluetooth.framework in Frameworks */,
+				3509B9BA1819C3AE0093F714 /* CoreLocation.framework in Frameworks */,
 				3509B9841819C0E70093F714 /* CoreGraphics.framework in Frameworks */,
 				3509B9861819C0E70093F714 /* UIKit.framework in Frameworks */,
 				3509B9821819C0E70093F714 /* Foundation.framework in Frameworks */,
@@ -79,10 +111,12 @@
 			isa = PBXGroup;
 			children = (
 				3509B9871819C0E70093F714 /* Vicinity */,
+				351FBBE7181AD13600299A5A /* Resources */,
 				3509B9881819C0E70093F714 /* Supporting Files */,
 				3509B9A91819C0E70093F714 /* VicinityTests */,
 				3509B9801819C0E70093F714 /* Frameworks */,
 				3509B97F1819C0E70093F714 /* Products */,
+				3509BA011819D66B0093F714 /* EasyLayoutLibrary.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,6 +132,8 @@
 		3509B9801819C0E70093F714 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3509B9BB1819C61B0093F714 /* CoreBluetooth.framework */,
+				3509B9B91819C3AE0093F714 /* CoreLocation.framework */,
 				3509B9811819C0E70093F714 /* Foundation.framework */,
 				3509B9831819C0E70093F714 /* CoreGraphics.framework */,
 				3509B9851819C0E70093F714 /* UIKit.framework */,
@@ -147,6 +183,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		3509BA021819D66B0093F714 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3509BA071819D66B0093F714 /* libEasyLayoutLibrary.a */,
+				3509BA091819D66B0093F714 /* EasyLayoutLibraryTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		351FBBE7181AD13600299A5A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				351FBBEA181AD15800299A5A /* Default-568h@2x.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -161,6 +214,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				3509BA0B1819D6830093F714 /* PBXTargetDependency */,
 			);
 			name = Vicinity;
 			productName = Vicinity;
@@ -211,6 +265,12 @@
 			mainGroup = 3509B9751819C0E70093F714;
 			productRefGroup = 3509B97F1819C0E70093F714 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 3509BA021819D66B0093F714 /* Products */;
+					ProjectRef = 3509BA011819D66B0093F714 /* EasyLayoutLibrary.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3509B97D1819C0E70093F714 /* Vicinity */,
@@ -219,12 +279,30 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		3509BA071819D66B0093F714 /* libEasyLayoutLibrary.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libEasyLayoutLibrary.a;
+			remoteRef = 3509BA061819D66B0093F714 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3509BA091819D66B0093F714 /* EasyLayoutLibraryTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = EasyLayoutLibraryTests.xctest;
+			remoteRef = 3509BA081819D66B0093F714 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		3509B97C1819C0E70093F714 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				3509B98C1819C0E70093F714 /* InfoPlist.strings in Resources */,
+				351FBBEC181AD15800299A5A /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +342,11 @@
 			isa = PBXTargetDependency;
 			target = 3509B97D1819C0E70093F714 /* Vicinity */;
 			targetProxy = 3509B9A71819C0E70093F714 /* PBXContainerItemProxy */;
+		};
+		3509BA0B1819D6830093F714 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EasyLayoutLibrary;
+			targetProxy = 3509BA0A1819D6830093F714 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -370,6 +453,7 @@
 				GCC_PREFIX_HEADER = "Vicinity/Vicinity-Prefix.pch";
 				INFOPLIST_FILE = "Vicinity/Vicinity-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/include/EasyLayoutLibrary";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -383,6 +467,7 @@
 				GCC_PREFIX_HEADER = "Vicinity/Vicinity-Prefix.pch";
 				INFOPLIST_FILE = "Vicinity/Vicinity-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/include/EasyLayoutLibrary";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -448,6 +533,7 @@
 				3509B9B51819C0E70093F714 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3509B9B61819C0E70093F714 /* Build configuration list for PBXNativeTarget "VicinityTests" */ = {
 			isa = XCConfigurationList;
@@ -456,6 +542,7 @@
 				3509B9B81819C0E70093F714 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
