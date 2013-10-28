@@ -18,7 +18,7 @@ void INLog(NSString *message, ...)
     va_end(args);
     
     [[ConsoleView singleton] logStringWithFormat:output];
-    NSLog(message,args);
+    NSLog(@"%@", output);
 }
 
 @implementation ConsoleView
