@@ -45,6 +45,10 @@
 		351FBC37181EFCAF00299A5A /* NSMutableSet+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 351FBC26181EFCAF00299A5A /* NSMutableSet+Ext.m */; };
 		351FBC38181EFCAF00299A5A /* NSMutableArray+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 351FBC28181EFCAF00299A5A /* NSMutableArray+Ext.m */; };
 		351FBC3C181EFD7E00299A5A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 351FBC3B181EFD7E00299A5A /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		351FBC44181F23A100299A5A /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC3D181F23A100299A5A /* circle.png */; };
+		351FBC45181F23A100299A5A /* circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC3E181F23A100299A5A /* circle@2x.png */; };
+		351FBC47181F23A100299A5A /* ring.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC42181F23A100299A5A /* ring.png */; };
+		351FBC48181F23A100299A5A /* ring@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC43181F23A100299A5A /* ring@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +150,10 @@
 		351FBC28181EFCAF00299A5A /* NSMutableArray+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Ext.m"; sourceTree = "<group>"; };
 		351FBC3A181EFD7E00299A5A /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		351FBC3B181EFD7E00299A5A /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		351FBC3D181F23A100299A5A /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = circle.png; path = Vicinity/circle.png; sourceTree = "<group>"; };
+		351FBC3E181F23A100299A5A /* circle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "circle@2x.png"; path = "Vicinity/circle@2x.png"; sourceTree = "<group>"; };
+		351FBC42181F23A100299A5A /* ring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ring.png; path = Vicinity/ring.png; sourceTree = "<group>"; };
+		351FBC43181F23A100299A5A /* ring@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ring@2x.png"; path = "Vicinity/ring@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,6 +277,10 @@
 		351FBBE7181AD13600299A5A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				351FBC3D181F23A100299A5A /* circle.png */,
+				351FBC3E181F23A100299A5A /* circle@2x.png */,
+				351FBC42181F23A100299A5A /* ring.png */,
+				351FBC43181F23A100299A5A /* ring@2x.png */,
 				351FBBEA181AD15800299A5A /* Default-568h@2x.png */,
 			);
 			name = Resources;
@@ -457,8 +469,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				351FBC45181F23A100299A5A /* circle@2x.png in Resources */,
+				351FBC44181F23A100299A5A /* circle.png in Resources */,
 				3509B98C1819C0E70093F714 /* InfoPlist.strings in Resources */,
+				351FBC48181F23A100299A5A /* ring@2x.png in Resources */,
 				351FBBEC181AD15800299A5A /* Default-568h@2x.png in Resources */,
+				351FBC47181F23A100299A5A /* ring.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
