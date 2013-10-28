@@ -28,6 +28,9 @@ typedef enum {
 
 @property (nonatomic, weak) id<INBeaconServiceDelegate> delegate;
 
+- (void)addDelegate:(id<INBeaconServiceDelegate>)delegate;
+- (void)removeDelegate:(id<INBeaconServiceDelegate>)delegate;
+
 + (INBeaconService *)singleton;
 
 - (void)startDetecting;

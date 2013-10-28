@@ -22,6 +22,8 @@
     
     CLLocationManager *locationManager;
     CBPeripheralManager *peripheralManager;
+    
+    NSMutableSet *delegates;
 }
 
 #pragma mark Singleton
@@ -38,8 +40,28 @@
 {
     if ((self = [super init])) {
         identifier = theIdentifier;
+        delegates = [[NSMutableSet alloc] init];
     }
     return self;
+}
+
+- (void)addDelegate:(id<INBeaconServiceDelegate>)delegate
+{
+    [delegates addObject:delegate];
+}
+
+- (void)removeDelegate:(id<INBeaconServiceDelegate>)delegate
+{
+    [delegates removeObject:delegate];
+}
+
+- (void)performBlockOnDelegates:(void(^)(id<INBeaconServiceDelegate> delegate))block
+{
+    for (id<INBeaconServiceDelegate>delegate in delegates) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            block(delegate);
+        });
+    }
 }
 
 - (void)startDetecting
@@ -178,7 +200,10 @@
         INLog(@"nearestBeacon proximity: %@", nearestBeacon.proximityString);
         
         INDetectorRange convertedRange = [self convertCLProximitytoINProximity:nearestBeacon.proximity];
-        [self.delegate service:self foundDeviceWithRange:convertedRange];
+        
+        [self performBlockOnDelegates:^(id<INBeaconServiceDelegate> delegate) {
+            [delegate service:self foundDeviceWithRange:convertedRange];
+        }];
     }
 }
 
