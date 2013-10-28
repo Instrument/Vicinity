@@ -45,7 +45,7 @@
     [EasyLayout topCenterViews:@[broadcastButton,detectButton]
                   inParentView:self.view offset:CGSizeMake(0.0f, 60.0f) padding:50.0f];
     
-    consoleView = [[ConsoleView alloc] init];
+    consoleView = [ConsoleView singleton];
     consoleView.extSize = CGSizeMake(self.view.extSize.width, floorf(self.view.extSize.height/2.0f));
     [EasyLayout bottomCenterView:consoleView inParentView:self.view offset:CGSizeZero];
     [self.view addSubview:consoleView];
@@ -60,7 +60,7 @@
 #pragma mark - CBPeripheralManagerDelegate
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
 {
-    [consoleView logStringWithFormat:@"-- bluetooth state changed: %d", peripheral.state];
+    INLog(@"-- bluetooth state changed: %d", peripheral.state);
     
     if (peripheral.state == CBPeripheralManagerStatePoweredOn) {
         [self startAdvertising];
@@ -70,9 +70,9 @@
 - (void)peripheralManagerDidStartAdvertising:(CBPeripheralManager *)peripheral error:(NSError *)error
 {
     if (error)
-        [consoleView logStringWithFormat:@"error starting advertising: %@", [error localizedDescription]];
+        INLog(@"error starting advertising: %@", [error localizedDescription]);
     else
-        [consoleView logStringWithFormat:@"did start advertising"];
+        INLog(@"did start advertising");
 }
 #pragma mark -
 
@@ -82,13 +82,13 @@
 {
     CLBeacon *nearestBeacon = [beacons firstObject];
     if (nearestBeacon)
-        [consoleView logStringWithFormat:@"nearestBeacon proximity: %@", nearestBeacon.proximityString];
+        INLog(@"nearestBeacon proximity: %@", nearestBeacon.proximityString);
 }
 
 - (void)locationManager:(CLLocationManager *)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
               withError:(NSError *)error
 {
-    [consoleView logStringWithFormat:@"Error with beacon region: %@ - %@", region, [error localizedDescription]];
+    INLog(@"Error with beacon region: %@ - %@", region, [error localizedDescription]);
 }
 
 
@@ -96,23 +96,23 @@
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
 {
     CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
-    [consoleView logStringWithFormat:@"did enter region: %@", beaconRegion.proximityUUID];
+    INLog(@"did enter region: %@", beaconRegion.proximityUUID);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
 {
     CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
-    [consoleView logStringWithFormat:@"did exit region: %@", beaconRegion.proximityUUID];
+    INLog(@"did exit region: %@", beaconRegion.proximityUUID);
 
     [locationManager stopRangingBeaconsInRegion:beaconRegion];
-    [consoleView logStringWithFormat:@"stopping range of beacon"];
+    INLog(@"stopping range of beacon");
 }
 
 - (void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region
               withError:(NSError *)error
 {
     CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
-    [consoleView logStringWithFormat:@"Error while monitoring region: %@ - error: %@", beaconRegion.proximityUUID, [error localizedDescription]];
+    INLog(@"Error while monitoring region: %@ - error: %@", beaconRegion.proximityUUID, [error localizedDescription]);
 }
 #pragma mark -
 
@@ -143,11 +143,11 @@
     
     // used for crossing region boundry
     [locationManager startMonitoringForRegion:beaconRegion];
-    [consoleView logStringWithFormat:@"starting detection..."];
+    INLog(@"starting detection...");
     
     // used for ranging beacons once they are near
     [locationManager startRangingBeaconsInRegion:beaconRegion];
-    [consoleView logStringWithFormat:@"starting to range beacon"];
+    INLog(@"starting to range beacon");
 }
 
 - (void)startBluetoothBroadcast
@@ -158,7 +158,7 @@
     
     // stop state if it's started
     if (peripheralManager.isAdvertising) {
-        [consoleView logStringWithFormat:@"Stopping broadcast"];
+        INLog(@"Stopping broadcast");
         [peripheralManager stopAdvertising];
         peripheralManager = nil;
     }
@@ -196,7 +196,7 @@
                     status == CBPeripheralManagerAuthorizationStatusNotDetermined);
     
     if (!enabled)
-        [consoleView logStringWithFormat:@"bluetooth not authorized"];
+        INLog(@"bluetooth not authorized");
     
     return enabled;
 }
@@ -208,7 +208,7 @@
     BOOL allowed = (status == kCLAuthorizationStatusAuthorized || status == kCLAuthorizationStatusNotDetermined);
     
     if (!enabled || !allowed)
-        [consoleView logStringWithFormat:@"Cannot monitor beacons: [%d,%d]", enabled, status];
+        INLog(@"Cannot monitor beacons: [%d,%d]", enabled, status);
     
     
     return enabled && allowed;

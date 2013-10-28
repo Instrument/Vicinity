@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+void INLog(NSString *message, ...);
+
 @interface ConsoleView : UIView
+
++ (ConsoleView *)singleton;
 
 - (void)logStringWithFormat:(NSString *)log, ...;
 @end

@@ -8,6 +8,17 @@
 
 #import "ConsoleView.h"
 #import "EasyLayout.h"
+#import "GCDSingleton.h"
+
+void INLog(NSString *message, ...)
+{
+    va_list args;
+    va_start(args, message);
+    NSString *output = [[NSString alloc] initWithFormat:message arguments:args];
+    va_end(args);
+    
+    [[ConsoleView singleton] logStringWithFormat:output];
+}
 
 @implementation ConsoleView
 {
@@ -16,11 +27,19 @@
     NSUInteger lineCounter;
 }
 
+#pragma mark Singleton
++ (ConsoleView *)singleton
+{
+    DEFINE_SHARED_INSTANCE_USING_BLOCK(^{
+        return [[self alloc] init];
+    });
+}
+#pragma mark -
+
 - (id)init
 {
- 
     if ((self = [super init])) {
- 
+        
     }
     return self;
 }

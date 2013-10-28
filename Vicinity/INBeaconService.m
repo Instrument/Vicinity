@@ -11,6 +11,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "CLBeacon+Ext.h"
 #import "GCDSingleton.h"
+#import "ConsoleView.h"
 
 @interface INBeaconService() <CBPeripheralManagerDelegate, CLLocationManagerDelegate>
 @end
@@ -79,11 +80,11 @@
     
     // used for crossing region boundry
     [locationManager startMonitoringForRegion:beaconRegion];
-    NSLog(@"starting detection...");
+    INLog(@"starting detection...");
     
     // used for ranging beacons once they are near
     [locationManager startRangingBeaconsInRegion:beaconRegion];
-    NSLog(@"starting to range beacon");
+    INLog(@"starting to range beacon");
 }
 
 - (void)startBluetoothBroadcast
@@ -94,7 +95,7 @@
     
     // stop state if it's started
     if (peripheralManager.isAdvertising) {
-        NSLog(@"Stopping broadcast");
+        INLog(@"Stopping broadcast");
         [peripheralManager stopAdvertising];
         peripheralManager = nil;
     }
@@ -131,7 +132,7 @@
                     status == CBPeripheralManagerAuthorizationStatusNotDetermined);
     
     if (!enabled)
-        NSLog(@"bluetooth not authorized");
+        INLog(@"bluetooth not authorized");
     
     return enabled;
 }
@@ -143,7 +144,7 @@
     BOOL allowed = (status == kCLAuthorizationStatusAuthorized || status == kCLAuthorizationStatusNotDetermined);
     
     if (!enabled || !allowed)
-        NSLog(@"Cannot monitor beacons: [%d,%d]", enabled, status);
+        INLog(@"Cannot monitor beacons: [%d,%d]", enabled, status);
     
     
     return enabled && allowed;
@@ -152,7 +153,7 @@
 #pragma mark - CBPeripheralManagerDelegate
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
 {
-    NSLog(@"-- bluetooth state changed: %d", peripheral.state);
+    INLog(@"-- bluetooth state changed: %d", peripheral.state);
     
     if (peripheral.state == CBPeripheralManagerStatePoweredOn) {
         [self startAdvertising];
@@ -162,9 +163,9 @@
 - (void)peripheralManagerDidStartAdvertising:(CBPeripheralManager *)peripheral error:(NSError *)error
 {
     if (error)
-        NSLog(@"error starting advertising: %@", [error localizedDescription]);
+        INLog(@"error starting advertising: %@", [error localizedDescription]);
     else
-        NSLog(@"did start advertising");
+        INLog(@"did start advertising");
 }
 #pragma mark -
 
@@ -174,7 +175,7 @@
 {
     CLBeacon *nearestBeacon = [beacons firstObject];
     if (nearestBeacon) {
-        NSLog(@"nearestBeacon proximity: %@", nearestBeacon.proximityString);
+        INLog(@"nearestBeacon proximity: %@", nearestBeacon.proximityString);
         
         INDetectorRange convertedRange = [self convertCLProximitytoINProximity:nearestBeacon.proximity];
         [self.delegate service:self foundDeviceWithRange:convertedRange];
@@ -184,7 +185,7 @@
 - (void)locationManager:(CLLocationManager *)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
               withError:(NSError *)error
 {
-    NSLog(@"Error with beacon region: %@ - %@", region, [error localizedDescription]);
+    INLog(@"Error with beacon region: %@ - %@", region, [error localizedDescription]);
 }
 
 
@@ -192,23 +193,23 @@
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
 {
     CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
-    NSLog(@"did enter region: %@", beaconRegion.proximityUUID);
+    INLog(@"did enter region: %@", beaconRegion.proximityUUID);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
 {
     CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
-    NSLog(@"did exit region: %@", beaconRegion.proximityUUID);
+    INLog(@"did exit region: %@", beaconRegion.proximityUUID);
     
     [locationManager stopRangingBeaconsInRegion:beaconRegion];
-    NSLog(@"stopping range of beacon");
+    INLog(@"stopping range of beacon");
 }
 
 - (void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region
               withError:(NSError *)error
 {
     CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
-    NSLog(@"Error while monitoring region: %@ - error: %@", beaconRegion.proximityUUID, [error localizedDescription]);
+    INLog(@"Error while monitoring region: %@ - error: %@", beaconRegion.proximityUUID, [error localizedDescription]);
 }
 #pragma mark -
 
