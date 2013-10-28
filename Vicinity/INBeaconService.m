@@ -13,6 +13,8 @@
 #import "GCDSingleton.h"
 #import "ConsoleView.h"
 
+#define ENABLE_REGION_BOUNDRY NO
+
 @interface INBeaconService() <CBPeripheralManagerDelegate, CLLocationManagerDelegate>
 @end
 
@@ -101,8 +103,10 @@
     CLBeaconRegion *beaconRegion = [self beacon];
     
     // used for crossing region boundry
-    [locationManager startMonitoringForRegion:beaconRegion];
-    INLog(@"starting detection...");
+    if (ENABLE_REGION_BOUNDRY) {
+        [locationManager startMonitoringForRegion:beaconRegion];
+        INLog(@"starting detection boundry");
+    }
     
     // used for ranging beacons once they are near
     [locationManager startRangingBeaconsInRegion:beaconRegion];
