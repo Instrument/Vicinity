@@ -178,7 +178,7 @@
 		3509B9751819C0E70093F714 = {
 			isa = PBXGroup;
 			children = (
-				3509B9871819C0E70093F714 /* Vicinity */,
+				3509B9871819C0E70093F714 /* Classes */,
 				351FBBE7181AD13600299A5A /* Resources */,
 				3509B9881819C0E70093F714 /* Supporting Files */,
 				351FBC39181EFD7400299A5A /* 3rd Party */,
@@ -211,7 +211,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3509B9871819C0E70093F714 /* Vicinity */ = {
+		3509B9871819C0E70093F714 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				351FBC07181EFCA500299A5A /* Extension */,
@@ -223,6 +223,7 @@
 				3509B9991819C0E70093F714 /* ViewController.h */,
 				3509B99A1819C0E70093F714 /* ViewController.m */,
 			);
+			name = Classes;
 			path = Vicinity;
 			sourceTree = "<group>";
 		};
