@@ -6,16 +6,16 @@
 //  Copyright (c) 2013 Instrument. All rights reserved.
 //
 
-#import "INDetectorService.h"
+#import "INBeaconService.h"
 #import <CoreLocation/CoreLocation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "CLBeacon+Ext.h"
 #import "GCDSingleton.h"
 
-@interface INDetectorService() <CBPeripheralManagerDelegate, CLLocationManagerDelegate>
+@interface INBeaconService() <CBPeripheralManagerDelegate, CLLocationManagerDelegate>
 @end
 
-@implementation INDetectorService
+@implementation INBeaconService
 {
     NSString *identifier;
     
@@ -24,7 +24,7 @@
 }
 
 #pragma mark Singleton
-+ (INDetectorService *)singleton
++ (INBeaconService *)singleton
 {
     DEFINE_SHARED_INSTANCE_USING_BLOCK(^{
         return [[self alloc] initWithIdentifier:SINGLETON_IDENTIFIER];
@@ -114,11 +114,11 @@
 - (CLBeaconRegion *)beacon
 {
     NSUUID *proximityUUID = [[NSUUID alloc]
-                             initWithUUIDString:@"CB284D88-5317-4FB4-9621-C5A3A49E6155"];
+                             initWithUUIDString:identifier];
     
     CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc]
                                     initWithProximityUUID:proximityUUID
-                                    identifier:@"com.weareinstrument.dawnsipadmini"];
+                                    identifier:@"com.weareinstrument.vicinity"];
     
     return beaconRegion;
 }
@@ -173,8 +173,12 @@
                inRegion:(CLBeaconRegion *)region
 {
     CLBeacon *nearestBeacon = [beacons firstObject];
-    if (nearestBeacon)
+    if (nearestBeacon) {
         NSLog(@"nearestBeacon proximity: %@", nearestBeacon.proximityString);
+        
+        INDetectorRange convertedRange = [self convertCLProximitytoINProximity:nearestBeacon.proximity];
+        [self.delegate service:self foundDeviceWithRange:convertedRange];
+    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
@@ -207,4 +211,25 @@
     NSLog(@"Error while monitoring region: %@ - error: %@", beaconRegion.proximityUUID, [error localizedDescription]);
 }
 #pragma mark -
+
+- (INDetectorRange)convertCLProximitytoINProximity:(CLProximity)proximity
+{
+    switch (proximity) {
+        case CLProximityFar:
+            return INDetectorRangeFar;
+            break;
+            
+        case CLProximityImmediate:
+            return INDetectorRangeImmediate;
+            break;
+            
+        case CLProximityNear:
+            return INDetectorRangeNear;
+            break;
+            
+        case CLProximityUnknown:
+            return INDetectorRangeUnknown;
+            break;
+    }
+}
 @end

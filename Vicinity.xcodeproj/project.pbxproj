@@ -25,7 +25,7 @@
 		351FBBEC181AD15800299A5A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBBEA181AD15800299A5A /* Default-568h@2x.png */; };
 		351FBBF0181ADE9D00299A5A /* CLBeacon+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 351FBBEF181ADE9D00299A5A /* CLBeacon+Ext.m */; };
 		351FBBF4181AFC9C00299A5A /* ConsoleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 351FBBF3181AFC9C00299A5A /* ConsoleView.m */; };
-		351FBBFE181EFC3A00299A5A /* INDetectorService.m in Sources */ = {isa = PBXBuildFile; fileRef = 351FBBFD181EFC3A00299A5A /* INDetectorService.m */; };
+		351FBBFE181EFC3A00299A5A /* INBeaconService.m in Sources */ = {isa = PBXBuildFile; fileRef = 351FBBFD181EFC3A00299A5A /* INBeaconService.m */; };
 		351FBC03181EFC8D00299A5A /* GCDUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 351FBC01181EFC8D00299A5A /* GCDUtilities.m */; };
 		351FBC06181EFC9800299A5A /* ReachabilityService.m in Sources */ = {isa = PBXBuildFile; fileRef = 351FBC05181EFC9800299A5A /* ReachabilityService.m */; };
 		351FBC29181EFCAF00299A5A /* NSRangeExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 351FBC0A181EFCAF00299A5A /* NSRangeExt.m */; };
@@ -104,8 +104,8 @@
 		351FBBEF181ADE9D00299A5A /* CLBeacon+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLBeacon+Ext.m"; sourceTree = "<group>"; };
 		351FBBF2181AFC9C00299A5A /* ConsoleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleView.h; sourceTree = "<group>"; };
 		351FBBF3181AFC9C00299A5A /* ConsoleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleView.m; sourceTree = "<group>"; };
-		351FBBFC181EFC3A00299A5A /* INDetectorService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INDetectorService.h; sourceTree = "<group>"; };
-		351FBBFD181EFC3A00299A5A /* INDetectorService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INDetectorService.m; sourceTree = "<group>"; };
+		351FBBFC181EFC3A00299A5A /* INBeaconService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INBeaconService.h; sourceTree = "<group>"; };
+		351FBBFD181EFC3A00299A5A /* INBeaconService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INBeaconService.m; sourceTree = "<group>"; };
 		351FBC00181EFC8D00299A5A /* GCDUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDUtilities.h; sourceTree = "<group>"; };
 		351FBC01181EFC8D00299A5A /* GCDUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDUtilities.m; sourceTree = "<group>"; };
 		351FBC02181EFC8D00299A5A /* GCDSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDSingleton.h; sourceTree = "<group>"; };
@@ -286,8 +286,8 @@
 		351FBBFB181EFC0D00299A5A /* System */ = {
 			isa = PBXGroup;
 			children = (
-				351FBBFC181EFC3A00299A5A /* INDetectorService.h */,
-				351FBBFD181EFC3A00299A5A /* INDetectorService.m */,
+				351FBBFC181EFC3A00299A5A /* INBeaconService.h */,
+				351FBBFD181EFC3A00299A5A /* INBeaconService.m */,
 			);
 			name = System;
 			sourceTree = "<group>";
@@ -501,7 +501,7 @@
 				351FBC36181EFCAF00299A5A /* NSMutableDictionary+Ext.m in Sources */,
 				351FBC38181EFCAF00299A5A /* NSMutableArray+Ext.m in Sources */,
 				3509B99B1819C0E70093F714 /* ViewController.m in Sources */,
-				351FBBFE181EFC3A00299A5A /* INDetectorService.m in Sources */,
+				351FBBFE181EFC3A00299A5A /* INBeaconService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

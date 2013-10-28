@@ -15,18 +15,20 @@ typedef enum {
     INDetectorRangeImmediate,
 } INDetectorRange;
 
-#define SINGLETON_IDENTIFIER @"1234-1234-1234-1234"
+#define SINGLETON_IDENTIFIER @"CB284D88-5317-4FB4-9621-C5A3A49E6155"
 
-@class INDetectorService;
-@protocol INDetectorServiceDelegate <NSObject>
-- (void)service:(INDetectorService *)service foundDeviceWithRange:(INDetectorRange)range;
+@class INBeaconService;
+@protocol INBeaconServiceDelegate <NSObject>
+- (void)service:(INBeaconService *)service foundDeviceWithRange:(INDetectorRange)range;
 @end
 
-@interface INDetectorService : NSObject
+@interface INBeaconService : NSObject
 
 - (id)initWithIdentifier:(NSString *)theIdentifier;
 
-+ (INDetectorService *)singleton;
+@property (nonatomic, weak) id<INBeaconServiceDelegate> delegate;
+
++ (INBeaconService *)singleton;
 
 - (void)startDetecting;
 - (void)stopDetecting;
