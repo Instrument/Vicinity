@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import "FindDeviceViewController.h"
 
 @implementation AppDelegate
 {
@@ -18,7 +19,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    controller = [[ViewController alloc] init];
+    controller = [[FindDeviceViewController alloc] init];
     self.window.rootViewController = controller;
     
     [self.window makeKeyAndVisible];

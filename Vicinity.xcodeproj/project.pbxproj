@@ -48,6 +48,7 @@
 		351FBC45181F23A100299A5A /* circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC3E181F23A100299A5A /* circle@2x.png */; };
 		351FBC47181F23A100299A5A /* ring.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC42181F23A100299A5A /* ring.png */; };
 		351FBC48181F23A100299A5A /* ring@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC43181F23A100299A5A /* ring@2x.png */; };
+		351FBC4B181F244A00299A5A /* FindDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 351FBC4A181F244A00299A5A /* FindDeviceViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,6 +154,8 @@
 		351FBC3E181F23A100299A5A /* circle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "circle@2x.png"; path = "Vicinity/circle@2x.png"; sourceTree = "<group>"; };
 		351FBC42181F23A100299A5A /* ring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ring.png; path = Vicinity/ring.png; sourceTree = "<group>"; };
 		351FBC43181F23A100299A5A /* ring@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ring@2x.png"; path = "Vicinity/ring@2x.png"; sourceTree = "<group>"; };
+		351FBC49181F244A00299A5A /* FindDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindDeviceViewController.h; sourceTree = "<group>"; };
+		351FBC4A181F244A00299A5A /* FindDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindDeviceViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +232,8 @@
 				351FBBF1181AFC7E00299A5A /* Views */,
 				3509B9991819C0E70093F714 /* ViewController.h */,
 				3509B99A1819C0E70093F714 /* ViewController.m */,
+				351FBC49181F244A00299A5A /* FindDeviceViewController.h */,
+				351FBC4A181F244A00299A5A /* FindDeviceViewController.m */,
 			);
 			name = Classes;
 			path = Vicinity;
@@ -514,6 +519,7 @@
 				351FBC34181EFCAF00299A5A /* NSObject+Ext.m in Sources */,
 				351FBC36181EFCAF00299A5A /* NSMutableDictionary+Ext.m in Sources */,
 				351FBC38181EFCAF00299A5A /* NSMutableArray+Ext.m in Sources */,
+				351FBC4B181F244A00299A5A /* FindDeviceViewController.m in Sources */,
 				3509B99B1819C0E70093F714 /* ViewController.m in Sources */,
 				351FBBFE181EFC3A00299A5A /* INBeaconService.m in Sources */,
 			);
