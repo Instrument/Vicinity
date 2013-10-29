@@ -105,14 +105,14 @@
     radarRing.frame = startFrame;
     
     // animate up and out
-    [UIView animateWithDuration:1.5f animations:^{
+    [UIView animateWithDuration:1.3f animations:^{
         radarRing.frame = endFrame;
         radarRing.alpha = 0.0f;
     } completion:^(BOOL finished) {
         
         
         
-        animationTimer = [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(animateRing:)
+        animationTimer = [NSTimer scheduledTimerWithTimeInterval:0.25f target:self selector:@selector(animateRing:)
                                                         userInfo:nil repeats:NO];
     }];
 }
