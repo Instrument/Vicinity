@@ -9,6 +9,7 @@
 #import "FindDeviceViewController.h"
 #import "INBeaconService.h"
 #import "EasyLayout.h"
+#import "ButtonMaker.h"
 
 @interface FindDeviceViewController () <INBeaconServiceDelegate>
 
@@ -76,14 +77,21 @@
     radarRing2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ring.png"]];
     radarRing2.contentMode = UIViewContentModeScaleToFill;
     [baseCircle addSubview:radarRing2];
+    
+    UIButton *modeButton = [ButtonMaker plainButtonWithNormalImageName:@"mode_button.png" selectedImageName:@"mode_button.png"];
+    [modeButton addTarget:self action:@selector(didToggleMode:) forControlEvents:UIControlEventTouchUpInside];
+    [EasyLayout positionView:modeButton aboveView:bottomToolbar offset:CGSizeMake(10.0f, -10.0f)];
+    [self.view addSubview:modeButton];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    [[INBeaconService singleton] startDetecting];
     [[INBeaconService singleton] addDelegate:self];
+    [[INBeaconService singleton] startDetecting];
+    
+    // force initial state
     [self service:nil foundDeviceWithRange:INDetectorRangeUnknown];
     
     [self animateRing:nil];
@@ -169,4 +177,16 @@
 }
 #pragma mark -
 
+- (void)didToggleMode:(UIButton *)button
+{
+    if ([INBeaconService singleton].isDetecting) {
+        [[INBeaconService singleton] stopDetecting];
+        [[INBeaconService singleton] startBroadcasting];
+    }
+    
+    if ([INBeaconService singleton].isBroadcasting) {
+        [[INBeaconService singleton] stopBroadcasting];
+        [[INBeaconService singleton] startDetecting];
+    }
+}
 @end

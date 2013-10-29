@@ -76,7 +76,7 @@
 
 - (void)stopDetecting
 {
-    
+    _isDetecting = NO;
 }
 
 - (void)startBroadcasting
@@ -90,7 +90,7 @@
 
 - (void)stopBroadcasting
 {
-    
+    _isBroadcasting = NO;
 }
 
 - (void)startDetectingBeacons
@@ -111,6 +111,8 @@
     // used for ranging beacons once they are near
     [locationManager startRangingBeaconsInRegion:beaconRegion];
     INLog(@"starting to range beacon");
+    
+    _isDetecting = YES;
 }
 
 - (void)startBluetoothBroadcast
@@ -136,6 +138,8 @@
     
     // Start advertising your beacon's data.
     [peripheralManager startAdvertising:beaconPeripheralData];
+    
+    _isBroadcasting = YES;
 }
 
 - (CLBeaconRegion *)beacon

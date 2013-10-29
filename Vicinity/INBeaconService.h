@@ -26,12 +26,13 @@ typedef enum {
 
 - (id)initWithIdentifier:(NSString *)theIdentifier;
 
-@property (nonatomic, weak) id<INBeaconServiceDelegate> delegate;
-
 - (void)addDelegate:(id<INBeaconServiceDelegate>)delegate;
 - (void)removeDelegate:(id<INBeaconServiceDelegate>)delegate;
 
 + (INBeaconService *)singleton;
+
+@property (nonatomic, readonly) BOOL isDetecting;
+@property (nonatomic, readonly) BOOL isBroadcasting;
 
 - (void)startDetecting;
 - (void)stopDetecting;
