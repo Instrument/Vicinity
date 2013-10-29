@@ -20,6 +20,10 @@
     
     UIImageView *baseCircle;
     UIImageView *targetCircle;
+    
+    UIImageView *radarRing;
+    
+    NSTimer *animationTimer;
 }
 
 - (id)init
@@ -54,6 +58,7 @@
     
     
     baseCircle = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"circle.png"]];
+    baseCircle.clipsToBounds = NO;
     [EasyLayout positionView:baseCircle aboveView:bottomToolbar horizontallyCenterWithView:self.view offset:CGSizeMake(0.0f, -50.0f)];
     
     [self.view addSubview:baseCircle];
@@ -63,6 +68,9 @@
     
     [self.view addSubview:targetCircle];
     
+    radarRing = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ring.png"]];
+    radarRing.contentMode = UIViewContentModeScaleToFill;
+    [baseCircle addSubview:radarRing];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -71,6 +79,42 @@
     
     [[INBeaconService singleton] startDetecting];
     [[INBeaconService singleton] addDelegate:self];
+    
+    [self animateRing:nil];
+}
+
+- (void)animateRing:(NSTimer *)timer
+{
+    
+    // pre-compute some frames for animation
+    
+    // compute start frame
+    radarRing.extSize = baseCircle.extHalfSize;
+    [EasyLayout bottomCenterView:radarRing inParentView:baseCircle offset:CGSizeMake(0.0f, -5.0f)];
+    radarRing.alpha = 1.0f;
+
+    CGRect startFrame = radarRing.frame;
+    
+    // compute end frame
+    radarRing.extSize = CGSizeMake(300.0f, 300.0f);
+    [EasyLayout bottomCenterView:radarRing inParentView:baseCircle offset:CGSizeZero];
+    CGRect endFrame = radarRing.frame;
+    
+    
+    // apply position
+    radarRing.frame = startFrame;
+    
+    // animate up and out
+    [UIView animateWithDuration:1.5f animations:^{
+        radarRing.frame = endFrame;
+        radarRing.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        
+        
+        
+        animationTimer = [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(animateRing:)
+                                                        userInfo:nil repeats:NO];
+    }];
 }
 
 #pragma mark - INBeaconServiceDelegate
