@@ -49,6 +49,8 @@
 		351FBC47181F23A100299A5A /* ring.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC42181F23A100299A5A /* ring.png */; };
 		351FBC48181F23A100299A5A /* ring@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC43181F23A100299A5A /* ring@2x.png */; };
 		351FBC4B181F244A00299A5A /* FindDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 351FBC4A181F244A00299A5A /* FindDeviceViewController.m */; };
+		351FBC4F18203A2F00299A5A /* Icon-phone-retina.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC4E18203A2F00299A5A /* Icon-phone-retina.png */; };
+		351FBC5118203A7C00299A5A /* Icon-pad-retina.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC5018203A7C00299A5A /* Icon-pad-retina.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -156,6 +158,8 @@
 		351FBC43181F23A100299A5A /* ring@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ring@2x.png"; path = "Vicinity/ring@2x.png"; sourceTree = "<group>"; };
 		351FBC49181F244A00299A5A /* FindDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindDeviceViewController.h; sourceTree = "<group>"; };
 		351FBC4A181F244A00299A5A /* FindDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindDeviceViewController.m; sourceTree = "<group>"; };
+		351FBC4E18203A2F00299A5A /* Icon-phone-retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-phone-retina.png"; path = "Vicinity/Icon-phone-retina.png"; sourceTree = "<group>"; };
+		351FBC5018203A7C00299A5A /* Icon-pad-retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-pad-retina.png"; path = "Vicinity/Icon-pad-retina.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,6 +285,8 @@
 		351FBBE7181AD13600299A5A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				351FBC5018203A7C00299A5A /* Icon-pad-retina.png */,
+				351FBC4E18203A2F00299A5A /* Icon-phone-retina.png */,
 				351FBC3D181F23A100299A5A /* circle.png */,
 				351FBC3E181F23A100299A5A /* circle@2x.png */,
 				351FBC42181F23A100299A5A /* ring.png */,
@@ -473,6 +479,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				351FBC4F18203A2F00299A5A /* Icon-phone-retina.png in Resources */,
+				351FBC5118203A7C00299A5A /* Icon-pad-retina.png in Resources */,
 				351FBC45181F23A100299A5A /* circle@2x.png in Resources */,
 				351FBC44181F23A100299A5A /* circle.png in Resources */,
 				351FBC48181F23A100299A5A /* ring@2x.png in Resources */,
@@ -645,7 +653,6 @@
 		3509B9B41819C0E70093F714 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Vicinity/Vicinity-Prefix.pch";
@@ -660,7 +667,6 @@
 		3509B9B51819C0E70093F714 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Vicinity/Vicinity-Prefix.pch";
