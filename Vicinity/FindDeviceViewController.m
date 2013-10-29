@@ -21,7 +21,8 @@
     UIImageView *baseCircle;
     UIImageView *targetCircle;
     
-    UIImageView *radarRing;
+    UIImageView *radarRing1;
+    UIImageView *radarRing2;
     
     NSTimer *animationTimer;
 }
@@ -68,9 +69,13 @@
     
     [self.view addSubview:targetCircle];
     
-    radarRing = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ring.png"]];
-    radarRing.contentMode = UIViewContentModeScaleToFill;
-    [baseCircle addSubview:radarRing];
+    radarRing1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ring.png"]];
+    radarRing1.contentMode = UIViewContentModeScaleToFill;
+    [baseCircle addSubview:radarRing1];
+    
+    radarRing2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ring.png"]];
+    radarRing2.contentMode = UIViewContentModeScaleToFill;
+    [baseCircle addSubview:radarRing2];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -89,29 +94,39 @@
     // pre-compute some frames for animation
     
     // compute start frame
-    radarRing.extSize = baseCircle.extHalfSize;
-    [EasyLayout bottomCenterView:radarRing inParentView:baseCircle offset:CGSizeMake(0.0f, -5.0f)];
-    radarRing.alpha = 1.0f;
+    radarRing1.extSize = baseCircle.extHalfSize;
+    [EasyLayout bottomCenterView:radarRing1 inParentView:baseCircle offset:CGSizeMake(0.0f, -5.0f)];
+    
 
-    CGRect startFrame = radarRing.frame;
+    CGRect startFrame = radarRing1.frame;
     
     // compute end frame
-    radarRing.extSize = CGSizeMake(300.0f, 300.0f);
-    [EasyLayout bottomCenterView:radarRing inParentView:baseCircle offset:CGSizeZero];
-    CGRect endFrame = radarRing.frame;
+    radarRing1.extSize = CGSizeMake(300.0f, 300.0f);
+    [EasyLayout bottomCenterView:radarRing1 inParentView:baseCircle offset:CGSizeZero];
+    CGRect endFrame = radarRing1.frame;
     
     
     // apply position
-    radarRing.frame = startFrame;
+    radarRing1.frame = startFrame;
+    radarRing1.alpha = 1.0f;
+    
+    radarRing2.frame = startFrame;
+    radarRing2.alpha = 1.0f;
     
     // animate up and out
     [UIView animateWithDuration:1.3f animations:^{
-        radarRing.frame = endFrame;
-        radarRing.alpha = 0.0f;
+        radarRing1.frame = endFrame;
+        radarRing1.alpha = 0.0f;
     } completion:^(BOOL finished) {
-        
-        
-        
+       
+    }];
+    
+    [UIView animateWithDuration:1.3f delay:0.1f options:0 animations:^{
+
+        radarRing2.frame = endFrame;
+        radarRing2.alpha = 0.0f;
+
+    } completion:^(BOOL finished) {
         animationTimer = [NSTimer scheduledTimerWithTimeInterval:0.25f target:self selector:@selector(animateRing:)
                                                         userInfo:nil repeats:NO];
     }];
