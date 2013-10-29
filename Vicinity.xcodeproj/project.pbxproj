@@ -51,6 +51,7 @@
 		351FBC4B181F244A00299A5A /* FindDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 351FBC4A181F244A00299A5A /* FindDeviceViewController.m */; };
 		351FBC4F18203A2F00299A5A /* Icon-phone-retina.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC4E18203A2F00299A5A /* Icon-phone-retina.png */; };
 		351FBC5118203A7C00299A5A /* Icon-pad-retina.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC5018203A7C00299A5A /* Icon-pad-retina.png */; };
+		351FBC5318203B1100299A5A /* Icon-pad.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC5218203B1100299A5A /* Icon-pad.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,6 +161,7 @@
 		351FBC4A181F244A00299A5A /* FindDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindDeviceViewController.m; sourceTree = "<group>"; };
 		351FBC4E18203A2F00299A5A /* Icon-phone-retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-phone-retina.png"; path = "Vicinity/Icon-phone-retina.png"; sourceTree = "<group>"; };
 		351FBC5018203A7C00299A5A /* Icon-pad-retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-pad-retina.png"; path = "Vicinity/Icon-pad-retina.png"; sourceTree = "<group>"; };
+		351FBC5218203B1100299A5A /* Icon-pad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-pad.png"; path = "Vicinity/Icon-pad.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -285,6 +287,7 @@
 		351FBBE7181AD13600299A5A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				351FBC5218203B1100299A5A /* Icon-pad.png */,
 				351FBC5018203A7C00299A5A /* Icon-pad-retina.png */,
 				351FBC4E18203A2F00299A5A /* Icon-phone-retina.png */,
 				351FBC3D181F23A100299A5A /* circle.png */,
@@ -481,6 +484,7 @@
 			files = (
 				351FBC4F18203A2F00299A5A /* Icon-phone-retina.png in Resources */,
 				351FBC5118203A7C00299A5A /* Icon-pad-retina.png in Resources */,
+				351FBC5318203B1100299A5A /* Icon-pad.png in Resources */,
 				351FBC45181F23A100299A5A /* circle@2x.png in Resources */,
 				351FBC44181F23A100299A5A /* circle.png in Resources */,
 				351FBC48181F23A100299A5A /* ring@2x.png in Resources */,
