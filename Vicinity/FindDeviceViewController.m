@@ -84,8 +84,14 @@
     
     [[INBeaconService singleton] startDetecting];
     [[INBeaconService singleton] addDelegate:self];
+    [self service:nil foundDeviceWithRange:INDetectorRangeUnknown];
     
     [self animateRing:nil];
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 - (void)animateRing:(NSTimer *)timer
@@ -135,26 +141,28 @@
 #pragma mark - INBeaconServiceDelegate
 - (void)service:(INBeaconService *)service foundDeviceWithRange:(INDetectorRange)range
 {
-    targetCircle.alpha = 1.0f;
     
     [UIView animateWithDuration:0.3f animations:^{
         switch (range) {
             case INDetectorRangeFar:
                 [EasyLayout topCenterView:targetCircle inParentView:self.view offset:CGSizeMake(0.0f, 50.0f)];
+                targetCircle.alpha = 0.7f;
                 break;
 
             case INDetectorRangeNear:
                 [EasyLayout topCenterView:targetCircle inParentView:self.view offset:CGSizeMake(0.0f, 150.0f)];
+                targetCircle.alpha = 1.0f;
                 break;
                 
             case INDetectorRangeImmediate:
                 [EasyLayout positionView:targetCircle aboveView:baseCircle
                             horizontallyCenterWithView:self.view offset:CGSizeMake(0.0f, 10.0f)];
+                targetCircle.alpha = 1.0f;
                 break;
                 
             case INDetectorRangeUnknown:
                 [EasyLayout topCenterView:targetCircle inParentView:self.view offset:CGSizeMake(0.0f, 50.0f)];
-                targetCircle.alpha = 0.7f;
+                targetCircle.alpha = 0.5f;
                 break;
         }
     }];
