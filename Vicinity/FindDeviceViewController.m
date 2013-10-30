@@ -26,6 +26,8 @@
     UIImageView *radarRing2;
     
     NSTimer *animationTimer;
+    
+    UIButton *modeButton;
 }
 
 - (id)init
@@ -78,7 +80,7 @@
     radarRing2.contentMode = UIViewContentModeScaleToFill;
     [baseCircle addSubview:radarRing2];
     
-    UIButton *modeButton = [ButtonMaker plainButtonWithNormalImageName:@"mode_button.png" selectedImageName:@"mode_button.png"];
+    modeButton = [ButtonMaker plainButtonWithNormalImageName:@"mode_button_detecting.png" selectedImageName:@"mode_button_broadcasting.png"];
     [modeButton addTarget:self action:@selector(didToggleMode:) forControlEvents:UIControlEventTouchUpInside];
     [EasyLayout positionView:modeButton aboveView:bottomToolbar offset:CGSizeMake(10.0f, -10.0f)];
     [self.view addSubview:modeButton];
@@ -180,11 +182,11 @@
 - (void)didToggleMode:(UIButton *)button
 {
     if ([INBeaconService singleton].isDetecting) {
+        modeButton.selected = YES;
         [[INBeaconService singleton] stopDetecting];
         [[INBeaconService singleton] startBroadcasting];
-    }
-    
-    if ([INBeaconService singleton].isBroadcasting) {
+    } else if ([INBeaconService singleton].isBroadcasting) {
+        modeButton.selected = NO;
         [[INBeaconService singleton] stopBroadcasting];
         [[INBeaconService singleton] startDetecting];
     }

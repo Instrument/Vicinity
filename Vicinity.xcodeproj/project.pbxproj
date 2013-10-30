@@ -52,8 +52,10 @@
 		351FBC4F18203A2F00299A5A /* Icon-phone-retina.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC4E18203A2F00299A5A /* Icon-phone-retina.png */; };
 		351FBC5118203A7C00299A5A /* Icon-pad-retina.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC5018203A7C00299A5A /* Icon-pad-retina.png */; };
 		351FBC5318203B1100299A5A /* Icon-pad.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC5218203B1100299A5A /* Icon-pad.png */; };
-		351FBC551820409A00299A5A /* mode_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC541820409A00299A5A /* mode_button.png */; };
-		351FBC57182040A100299A5A /* mode_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC56182040A100299A5A /* mode_button@2x.png */; };
+		351FBC5C1820434A00299A5A /* mode_button_broadcasting.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC581820434A00299A5A /* mode_button_broadcasting.png */; };
+		351FBC5D1820434A00299A5A /* mode_button_broadcasting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC591820434A00299A5A /* mode_button_broadcasting@2x.png */; };
+		351FBC5E1820434A00299A5A /* mode_button_detecting.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC5A1820434A00299A5A /* mode_button_detecting.png */; };
+		351FBC5F1820434A00299A5A /* mode_button_detecting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC5B1820434A00299A5A /* mode_button_detecting@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,8 +166,10 @@
 		351FBC4E18203A2F00299A5A /* Icon-phone-retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-phone-retina.png"; path = "Vicinity/Icon-phone-retina.png"; sourceTree = "<group>"; };
 		351FBC5018203A7C00299A5A /* Icon-pad-retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-pad-retina.png"; path = "Vicinity/Icon-pad-retina.png"; sourceTree = "<group>"; };
 		351FBC5218203B1100299A5A /* Icon-pad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-pad.png"; path = "Vicinity/Icon-pad.png"; sourceTree = "<group>"; };
-		351FBC541820409A00299A5A /* mode_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mode_button.png; path = Vicinity/mode_button.png; sourceTree = "<group>"; };
-		351FBC56182040A100299A5A /* mode_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mode_button@2x.png"; path = "Vicinity/mode_button@2x.png"; sourceTree = "<group>"; };
+		351FBC581820434A00299A5A /* mode_button_broadcasting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mode_button_broadcasting.png; path = Vicinity/mode_button_broadcasting.png; sourceTree = "<group>"; };
+		351FBC591820434A00299A5A /* mode_button_broadcasting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mode_button_broadcasting@2x.png"; path = "Vicinity/mode_button_broadcasting@2x.png"; sourceTree = "<group>"; };
+		351FBC5A1820434A00299A5A /* mode_button_detecting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mode_button_detecting.png; path = Vicinity/mode_button_detecting.png; sourceTree = "<group>"; };
+		351FBC5B1820434A00299A5A /* mode_button_detecting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mode_button_detecting@2x.png"; path = "Vicinity/mode_button_detecting@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -291,8 +295,10 @@
 		351FBBE7181AD13600299A5A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				351FBC56182040A100299A5A /* mode_button@2x.png */,
-				351FBC541820409A00299A5A /* mode_button.png */,
+				351FBC581820434A00299A5A /* mode_button_broadcasting.png */,
+				351FBC591820434A00299A5A /* mode_button_broadcasting@2x.png */,
+				351FBC5A1820434A00299A5A /* mode_button_detecting.png */,
+				351FBC5B1820434A00299A5A /* mode_button_detecting@2x.png */,
 				351FBC5218203B1100299A5A /* Icon-pad.png */,
 				351FBC5018203A7C00299A5A /* Icon-pad-retina.png */,
 				351FBC4E18203A2F00299A5A /* Icon-phone-retina.png */,
@@ -490,12 +496,14 @@
 			files = (
 				351FBC4F18203A2F00299A5A /* Icon-phone-retina.png in Resources */,
 				351FBC5118203A7C00299A5A /* Icon-pad-retina.png in Resources */,
-				351FBC551820409A00299A5A /* mode_button.png in Resources */,
+				351FBC5F1820434A00299A5A /* mode_button_detecting@2x.png in Resources */,
+				351FBC5E1820434A00299A5A /* mode_button_detecting.png in Resources */,
 				351FBC5318203B1100299A5A /* Icon-pad.png in Resources */,
 				351FBC45181F23A100299A5A /* circle@2x.png in Resources */,
-				351FBC57182040A100299A5A /* mode_button@2x.png in Resources */,
 				351FBC44181F23A100299A5A /* circle.png in Resources */,
 				351FBC48181F23A100299A5A /* ring@2x.png in Resources */,
+				351FBC5D1820434A00299A5A /* mode_button_broadcasting@2x.png in Resources */,
+				351FBC5C1820434A00299A5A /* mode_button_broadcasting.png in Resources */,
 				351FBBEC181AD15800299A5A /* Default-568h@2x.png in Resources */,
 				351FBC47181F23A100299A5A /* ring.png in Resources */,
 			);

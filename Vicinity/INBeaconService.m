@@ -76,6 +76,9 @@
 
 - (void)stopDetecting
 {
+    CLBeaconRegion *beaconRegion = [self beacon];
+    [locationManager stopRangingBeaconsInRegion:beaconRegion];
+    
     _isDetecting = NO;
 }
 
@@ -91,6 +94,9 @@
 - (void)stopBroadcasting
 {
     _isBroadcasting = NO;
+    
+    // stop advertising beacon data.
+    [peripheralManager stopAdvertising];
 }
 
 - (void)startDetectingBeacons
