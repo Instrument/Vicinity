@@ -43,6 +43,7 @@
     if ((self = [super init])) {
         identifier = theIdentifier;
         delegates = [[NSMutableSet alloc] init];
+        
     }
     return self;
 }
@@ -97,6 +98,7 @@
     
     // stop advertising beacon data.
     [peripheralManager stopAdvertising];
+    peripheralManager = nil;
 }
 
 - (void)startDetectingBeacons
@@ -126,13 +128,6 @@
     // start broadcasting if it's stopped
     if (!peripheralManager)
         peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:nil];
-    
-    // stop state if it's started
-    if (peripheralManager.isAdvertising) {
-        INLog(@"Stopping broadcast");
-        [peripheralManager stopAdvertising];
-        peripheralManager = nil;
-    }
 }
 
 - (void)startAdvertising
