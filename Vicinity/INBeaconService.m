@@ -10,6 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "CLBeacon+Ext.h"
+#import "CBPeripheralManager+Ext.h"
 #import "GCDSingleton.h"
 #import "ConsoleView.h"
 
@@ -106,6 +107,9 @@
     if (!locationManager) {
         locationManager = [[CLLocationManager alloc] init];
         locationManager.delegate = self;
+
+        // this doesn't qualify for automobile or fitness, so choose other
+        locationManager.activityType = CLActivityTypeOther;
     }
     
     CLBeaconRegion *beaconRegion = [self beacon];
@@ -184,7 +188,7 @@
 #pragma mark - CBPeripheralManagerDelegate
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
 {
-    INLog(@"-- bluetooth state changed: %d", peripheral.state);
+    INLog(@"-- bluetooth state changed: %@", peripheral.stateString);
     
     if (peripheral.state == CBPeripheralManagerStatePoweredOn) {
         [self startAdvertising];

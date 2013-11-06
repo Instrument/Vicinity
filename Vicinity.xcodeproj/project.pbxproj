@@ -56,6 +56,7 @@
 		351FBC5D1820434A00299A5A /* mode_button_broadcasting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC591820434A00299A5A /* mode_button_broadcasting@2x.png */; };
 		351FBC5E1820434A00299A5A /* mode_button_detecting.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC5A1820434A00299A5A /* mode_button_detecting.png */; };
 		351FBC5F1820434A00299A5A /* mode_button_detecting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC5B1820434A00299A5A /* mode_button_detecting@2x.png */; };
+		355B19D9182B082E00B71F7D /* CBPeripheralManager+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 355B19D8182B082E00B71F7D /* CBPeripheralManager+Ext.m */; };
 		356B50A51829972D00318DF1 /* BeaconCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 356B50A41829972D00318DF1 /* BeaconCircleView.m */; };
 /* End PBXBuildFile section */
 
@@ -170,6 +171,8 @@
 		351FBC591820434A00299A5A /* mode_button_broadcasting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mode_button_broadcasting@2x.png"; path = "Vicinity/mode_button_broadcasting@2x.png"; sourceTree = "<group>"; };
 		351FBC5A1820434A00299A5A /* mode_button_detecting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mode_button_detecting.png; path = Vicinity/mode_button_detecting.png; sourceTree = "<group>"; };
 		351FBC5B1820434A00299A5A /* mode_button_detecting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mode_button_detecting@2x.png"; path = "Vicinity/mode_button_detecting@2x.png"; sourceTree = "<group>"; };
+		355B19D7182B082E00B71F7D /* CBPeripheralManager+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CBPeripheralManager+Ext.h"; sourceTree = "<group>"; };
+		355B19D8182B082E00B71F7D /* CBPeripheralManager+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBPeripheralManager+Ext.m"; sourceTree = "<group>"; };
 		356B50A31829972D00318DF1 /* BeaconCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconCircleView.h; sourceTree = "<group>"; };
 		356B50A41829972D00318DF1 /* BeaconCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconCircleView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -382,6 +385,8 @@
 				351FBC28181EFCAF00299A5A /* NSMutableArray+Ext.m */,
 				351FBBEE181ADE9D00299A5A /* CLBeacon+Ext.h */,
 				351FBBEF181ADE9D00299A5A /* CLBeacon+Ext.m */,
+				355B19D7182B082E00B71F7D /* CBPeripheralManager+Ext.h */,
+				355B19D8182B082E00B71F7D /* CBPeripheralManager+Ext.m */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -527,6 +532,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				355B19D9182B082E00B71F7D /* CBPeripheralManager+Ext.m in Sources */,
 				351FBC03181EFC8D00299A5A /* GCDUtilities.m in Sources */,
 				351FBC35181EFCAF00299A5A /* UILabel+Ext.m in Sources */,
 				351FBBF4181AFC9C00299A5A /* ConsoleView.m in Sources */,
