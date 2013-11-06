@@ -96,7 +96,6 @@
 		3509B9831819C0E70093F714 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3509B9851819C0E70093F714 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3509B9891819C0E70093F714 /* Vicinity-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Vicinity-Info.plist"; sourceTree = "<group>"; };
-		3509B98B1819C0E70093F714 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3509B98D1819C0E70093F714 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3509B98F1819C0E70093F714 /* Vicinity-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vicinity-Prefix.pch"; sourceTree = "<group>"; };
 		3509B9901819C0E70093F714 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -260,7 +259,6 @@
 			isa = PBXGroup;
 			children = (
 				3509B9891819C0E70093F714 /* Vicinity-Info.plist */,
-				3509B98A1819C0E70093F714 /* InfoPlist.strings */,
 				3509B98D1819C0E70093F714 /* main.m */,
 				3509B98F1819C0E70093F714 /* Vicinity-Prefix.pch */,
 			);
@@ -583,14 +581,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3509B98A1819C0E70093F714 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3509B98B1819C0E70093F714 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		3509B9AC1819C0E70093F714 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
