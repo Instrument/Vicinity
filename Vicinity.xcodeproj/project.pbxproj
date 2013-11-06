@@ -670,11 +670,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Vince LaVecchia (65H3FC65MZ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Vicinity/Vicinity-Prefix.pch";
 				INFOPLIST_FILE = "Vicinity/Vicinity-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "3D0A5173-3D1C-4985-A891-597586AD790E";
 				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/include/EasyLayoutLibrary";
 				WRAPPER_EXTENSION = app;
 			};
@@ -684,11 +686,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Instrument Marketing Inc. (XG383HYWBZ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Vicinity/Vicinity-Prefix.pch";
 				INFOPLIST_FILE = "Vicinity/Vicinity-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "BD184EAD-4A1E-4EE9-AE8C-E64296120D7E";
 				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/include/EasyLayoutLibrary";
 				WRAPPER_EXTENSION = app;
 			};
