@@ -19,6 +19,7 @@
 @implementation FindDeviceViewController
 {
     UILabel *statusLabel;
+    UILabel *distanceLabel;
     
     BeaconCircleView *baseCircle;
     BeaconCircleView *targetCircle;
@@ -69,6 +70,13 @@
     
     [self.view addSubview:targetCircle];
     
+    distanceLabel = [[UILabel alloc] init];
+    distanceLabel.textColor = [UIColor blackColor];
+    distanceLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0f];
+    distanceLabel.text = @"Unknown";
+    [EasyLayout sizeLabel:distanceLabel mode:ELLineModeMulti maxWidth:100.0f];
+    [EasyLayout positionView:distanceLabel toRightAndVerticalCenterOfView:targetCircle offset:CGSizeMake(15.0f, 0.0f)];
+    [self.view addSubview:distanceLabel];
     
     
     modeButton = [ButtonMaker plainButtonWithNormalImageName:@"mode_button_detecting.png" selectedImageName:@"mode_button_broadcasting.png"];
@@ -105,23 +113,40 @@
         switch (range) {
             case INDetectorRangeFar:
                 [EasyLayout topCenterView:targetCircle inParentView:self.view offset:CGSizeMake(0.0f, 50.0f)];
-                targetCircle.alpha = 0.7f;
+                targetCircle.alpha = 1.0f;
+                
+                distanceLabel.text = @"Within 60ft";
+                [EasyLayout sizeLabel:distanceLabel mode:ELLineModeMulti maxWidth:100.0f];
+                [EasyLayout positionView:distanceLabel toRightAndVerticalCenterOfView:targetCircle offset:CGSizeMake(15.0f, 0.0f)];
                 break;
 
             case INDetectorRangeNear:
+                [EasyLayout sizeLabel:distanceLabel mode:ELLineModeMulti maxWidth:100.0f];
                 [EasyLayout topCenterView:targetCircle inParentView:self.view offset:CGSizeMake(0.0f, 150.0f)];
                 targetCircle.alpha = 1.0f;
+                
+                distanceLabel.text = @"Within 5ft";
+                [EasyLayout sizeLabel:distanceLabel mode:ELLineModeMulti maxWidth:100.0f];
+                [EasyLayout positionView:distanceLabel toRightAndVerticalCenterOfView:targetCircle offset:CGSizeMake(15.0f, 0.0f)];
                 break;
                 
             case INDetectorRangeImmediate:
                 [EasyLayout positionView:targetCircle aboveView:baseCircle
                             horizontallyCenterWithView:self.view offset:CGSizeMake(0.0f, 10.0f)];
                 targetCircle.alpha = 1.0f;
+                
+                distanceLabel.text = @"Within 1 foot";
+                [EasyLayout sizeLabel:distanceLabel mode:ELLineModeMulti maxWidth:100.0f];
+                [EasyLayout positionView:distanceLabel toRightAndVerticalCenterOfView:targetCircle offset:CGSizeMake(15.0f, 0.0f)];
                 break;
                 
             case INDetectorRangeUnknown:
                 [EasyLayout topCenterView:targetCircle inParentView:self.view offset:CGSizeMake(0.0f, 50.0f)];
                 targetCircle.alpha = 0.5f;
+                
+                distanceLabel.text = @"Out of range";
+                [EasyLayout sizeLabel:distanceLabel mode:ELLineModeMulti maxWidth:100.0f];
+                [EasyLayout positionView:distanceLabel toRightAndVerticalCenterOfView:targetCircle offset:CGSizeMake(15.0f, 0.0f)];
                 break;
         }
     }];
@@ -151,6 +176,7 @@
     
     [targetCircle stopAnimation];
     targetCircle.hidden = YES;
+    distanceLabel.hidden = YES;
     [baseCircle startAnimationWithDirection:BeaconDirectionUp];
 }
 
@@ -160,6 +186,7 @@
     [EasyLayout sizeLabel:statusLabel mode:ELLineModeSingle maxWidth:self.view.extSize.width];
     
     targetCircle.hidden = NO;
+    distanceLabel.hidden = NO;
     [targetCircle startAnimationWithDirection:BeaconDirectionDown];
     [baseCircle stopAnimation];
 }
