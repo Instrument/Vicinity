@@ -108,7 +108,7 @@
     NSUInteger dayNumber;
     if (originalDayNumber > 20) {
         //look at last digit (i.e., the 2 in "22" = 22nd)
-        NSString *dayString = [NSString stringWithFormat:@"%i", originalDayNumber];
+        NSString *dayString = [NSString stringWithFormat:@"%lu", (unsigned long)originalDayNumber];
         dayString = [dayString substringFromIndex:dayString.length-1];
         dayNumber = [dayString integerValue];
     }
@@ -132,6 +132,6 @@
     else if (originalDayNumber == 11 || originalDayNumber == 30)
         postfix = @"th";
     
-    return [NSString stringWithFormat:@"%d%@", originalDayNumber, postfix];
+    return [NSString stringWithFormat:@"%lu%@", (unsigned long)originalDayNumber, postfix];
 }
 @end

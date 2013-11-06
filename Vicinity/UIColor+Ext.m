@@ -69,7 +69,7 @@ NSUInteger intFromHexChar(char c) {
     
     [self getRed:&red green:&green blue:&blue alpha:&alpha];
     
-    return [NSString stringWithFormat:@"%02X%02X%02X", (NSUInteger)(red*255.0f), (NSUInteger)(green*255.0f), (NSUInteger)(blue*255.0f)];
+    return [NSString stringWithFormat:@"%02lX%02lX%02lX", (unsigned long)(red*255.0f), (unsigned long)(green*255.0f), (unsigned long)(blue*255.0f)];
 }
 
 @end

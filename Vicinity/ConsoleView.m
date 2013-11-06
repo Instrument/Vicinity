@@ -81,7 +81,7 @@ void INLog(NSString *message, ...)
     va_end(args);
     
     
-    outputLabel.text = [NSString stringWithFormat:@"%d: %@\n%@", lineCounter, output, outputLabel.text];
+    outputLabel.text = [NSString stringWithFormat:@"%lu: %@\n%@", (unsigned long)lineCounter, output, outputLabel.text];
     [self setNeedsLayout];
     
     lineCounter++;
