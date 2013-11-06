@@ -48,7 +48,8 @@
 - (void)startAnimationWithDirection:(BeaconDirection)direction
 {
     isAnimating = YES;
-    [self animateRing:nil];
+    NSTimer *timer = [NSTimer timerWithTimeInterval:0.0f target:nil selector:nil userInfo:[NSNumber numberWithInt:direction] repeats:NO];
+    [self animateRing:timer];
 }
 
 - (void)stopAnimation
@@ -63,6 +64,8 @@
 
 - (void)animateRing:(NSTimer *)timer
 {
+    BeaconDirection direction = [timer.userInfo intValue];
+    
     radarRing1.hidden = NO;
     radarRing2.hidden = NO;
     
@@ -70,14 +73,21 @@
     
     // compute start frame
     radarRing1.extSize = circleImage.extHalfSize;
-    [EasyLayout bottomCenterView:radarRing1 inParentView:circleImage offset:CGSizeMake(0.0f, -5.0f)];
+    if (direction == BeaconDirectionUp)
+        [EasyLayout bottomCenterView:radarRing1 inParentView:circleImage offset:CGSizeZero];
+    if (direction == BeaconDirectionDown)
+        [EasyLayout topCenterView:radarRing1 inParentView:circleImage offset:CGSizeMake(0.0f, 5.0f)];
     
     
     CGRect startFrame = radarRing1.frame;
     
     // compute end frame
     radarRing1.extSize = CGSizeMake(300.0f, 300.0f);
-    [EasyLayout bottomCenterView:radarRing1 inParentView:circleImage offset:CGSizeZero];
+    if (direction == BeaconDirectionUp)
+        [EasyLayout bottomCenterView:radarRing1 inParentView:circleImage offset:CGSizeZero];
+    if (direction == BeaconDirectionDown)
+        [EasyLayout topCenterView:radarRing1 inParentView:circleImage offset:CGSizeZero];
+    
     CGRect endFrame = radarRing1.frame;
     
     
@@ -109,7 +119,7 @@
         }
         
         animationTimer = [NSTimer scheduledTimerWithTimeInterval:0.25f target:self selector:@selector(animateRing:)
-                                                        userInfo:nil repeats:NO];
+                                                        userInfo:[NSNumber numberWithInt:direction] repeats:NO];
     }];
 }
 @end

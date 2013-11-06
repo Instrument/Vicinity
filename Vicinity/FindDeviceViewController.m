@@ -60,7 +60,6 @@
     
     
     baseCircle = [[BeaconCircleView alloc] init];
-    baseCircle.clipsToBounds = NO;
     [EasyLayout positionView:baseCircle aboveView:bottomToolbar horizontallyCenterWithView:self.view offset:CGSizeMake(0.0f, -50.0f)];
     
     [self.view addSubview:baseCircle];
@@ -84,6 +83,8 @@
     
     [[INBeaconService singleton] addDelegate:self];
     [[INBeaconService singleton] startDetecting];
+    
+    [targetCircle startAnimationWithDirection:BeaconDirectionDown];
     
     // force initial state
     [self service:nil foundDeviceWithRange:INDetectorRangeUnknown];
