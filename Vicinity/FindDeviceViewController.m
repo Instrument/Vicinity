@@ -150,6 +150,7 @@
     [EasyLayout sizeLabel:statusLabel mode:ELLineModeSingle maxWidth:self.view.extSize.width];
     
     [targetCircle stopAnimation];
+    targetCircle.hidden = YES;
     [baseCircle startAnimationWithDirection:BeaconDirectionUp];
 }
 
@@ -158,6 +159,7 @@
     statusLabel.text = @"Detecting...";
     [EasyLayout sizeLabel:statusLabel mode:ELLineModeSingle maxWidth:self.view.extSize.width];
     
+    targetCircle.hidden = NO;
     [targetCircle startAnimationWithDirection:BeaconDirectionDown];
     [baseCircle stopAnimation];
 }

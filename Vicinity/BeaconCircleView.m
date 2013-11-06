@@ -74,7 +74,7 @@
     // compute start frame
     radarRing1.extSize = circleImage.extHalfSize;
     if (direction == BeaconDirectionUp)
-        [EasyLayout bottomCenterView:radarRing1 inParentView:circleImage offset:CGSizeZero];
+        [EasyLayout bottomCenterView:radarRing1 inParentView:circleImage offset:CGSizeMake(0.0f, -5.0f)];
     if (direction == BeaconDirectionDown)
         [EasyLayout topCenterView:radarRing1 inParentView:circleImage offset:CGSizeMake(0.0f, 5.0f)];
     
