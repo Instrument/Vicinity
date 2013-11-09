@@ -116,6 +116,7 @@
     
     // used for crossing region boundry
     if (ENABLE_REGION_BOUNDRY) {
+        beaconRegion.notifyEntryStateOnDisplay = YES;
         [locationManager startMonitoringForRegion:beaconRegion];
         INLog(@"starting detection boundry");
     }
