@@ -13,7 +13,6 @@
 #import "CBCentralManager+Ext.h"
 #import "GCDSingleton.h"
 #import "ConsoleView.h"
-#import "INWeightedAverage.h"
 #import "EasedValue.h"
 
 #define ENABLE_REGION_BOUNDRY NO
@@ -31,7 +30,7 @@
     NSMutableSet *delegates;
     
     INDetectorRange previousRange;
-    INWeightedAverage *averageProximity;
+
     EasedValue *easedProximity;
 }
 
@@ -51,7 +50,6 @@
         identifier = theIdentifier;
         delegates = [[NSMutableSet alloc] init];
         
-        averageProximity = [[INWeightedAverage alloc] init];
         easedProximity = [[EasedValue alloc] init];
         
     }
@@ -231,9 +229,6 @@ BOOL inRange(NSInteger start, NSInteger end, NSInteger target)
 {
     easedProximity.value = fabsf(proximity);
     [easedProximity update];
-    
-//    [averageProximity addValue:proximity];
-//    proximity = [averageProximity weightedAverage];
 
     proximity = easedProximity.value * -1.0f;
     
