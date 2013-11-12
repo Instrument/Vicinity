@@ -220,26 +220,22 @@
 }
 #pragma mark -
 
-BOOL inRange(NSInteger start, NSInteger end, NSInteger target)
-{
-    return target >= start && target <= end;
-}
-
 - (INDetectorRange)convertRSSItoINProximity:(NSInteger)proximity
 {
+    // eased value doesn't support negative values
     easedProximity.value = fabsf(proximity);
     [easedProximity update];
-
     proximity = easedProximity.value * -1.0f;
     
     INLog(@"proximity: %d", proximity);
     
-    if (inRange(-58, -20, proximity))
-        return INDetectorRangeImmediate;
-    if (inRange(-70, -59, proximity))
-        return INDetectorRangeNear;
-    if (inRange(-999, -71, proximity))
+    
+    if (proximity < -70)
         return INDetectorRangeFar;
+    if (proximity < -55)
+        return INDetectorRangeNear;
+    if (proximity < 0)
+        return INDetectorRangeImmediate;
     
     return INDetectorRangeUnknown;
 }
