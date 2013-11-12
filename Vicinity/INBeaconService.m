@@ -7,26 +7,28 @@
 //
 
 #import "INBeaconService.h"
-#import <CoreLocation/CoreLocation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "CLBeacon+Ext.h"
 #import "CBPeripheralManager+Ext.h"
+#import "CBCentralManager+Ext.h"
 #import "GCDSingleton.h"
 #import "ConsoleView.h"
 
 #define ENABLE_REGION_BOUNDRY NO
 
-@interface INBeaconService() <CBPeripheralManagerDelegate, CLLocationManagerDelegate>
+@interface INBeaconService() <CBPeripheralManagerDelegate, CBCentralManagerDelegate>
 @end
 
 @implementation INBeaconService
 {
     NSString *identifier;
     
-    CLLocationManager *locationManager;
+    CBCentralManager *centralManager;
     CBPeripheralManager *peripheralManager;
     
     NSMutableSet *delegates;
+    
+    INDetectorRange previousRange;
 }
 
 #pragma mark Singleton
@@ -76,12 +78,21 @@
     [self startDetectingBeacons];
 }
 
+- (void)startScanning
+{
+    NSDictionary *scanOptions = @{CBCentralManagerScanOptionAllowDuplicatesKey:@(YES)};
+    NSArray *services = @[[CBUUID UUIDWithString:identifier]];
+    
+    [centralManager scanForPeripheralsWithServices:services options:scanOptions];
+    _isDetecting = YES;
+}
+
 - (void)stopDetecting
 {
-    CLBeaconRegion *beaconRegion = [self beacon];
-    [locationManager stopRangingBeaconsInRegion:beaconRegion];
-    
     _isDetecting = NO;
+    
+    [centralManager stopScan];
+    centralManager = nil;
 }
 
 - (void)startBroadcasting
@@ -104,28 +115,8 @@
 
 - (void)startDetectingBeacons
 {
-    if (!locationManager) {
-        locationManager = [[CLLocationManager alloc] init];
-        locationManager.delegate = self;
-
-        // this doesn't qualify for automobile or fitness, so choose other
-        locationManager.activityType = CLActivityTypeOther;
-    }
-    
-    CLBeaconRegion *beaconRegion = [self beacon];
-    
-    // used for crossing region boundry
-    if (ENABLE_REGION_BOUNDRY) {
-        beaconRegion.notifyEntryStateOnDisplay = YES;
-        [locationManager startMonitoringForRegion:beaconRegion];
-        INLog(@"starting detection boundry");
-    }
-    
-    // used for ranging beacons once they are near
-    [locationManager startRangingBeaconsInRegion:beaconRegion];
-    INLog(@"starting to range beacon");
-    
-    _isDetecting = YES;
+    if (!centralManager)
+        centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:Nil options:nil];
 }
 
 - (void)startBluetoothBroadcast
@@ -137,13 +128,12 @@
 
 - (void)startAdvertising
 {
-    CLBeaconRegion *beaconRegion = [self beacon];
-    
-    // Create a dictionary of advertisement data.
-    NSDictionary *beaconPeripheralData = [beaconRegion peripheralDataWithMeasuredPower:nil];
-    
-    // Start advertising your beacon's data.
-    [peripheralManager startAdvertising:beaconPeripheralData];
+
+    NSDictionary *advertisingData = @{CBAdvertisementDataLocalNameKey:@"vicinity-peripheral",
+                                      CBAdvertisementDataServiceUUIDsKey:@[[CBUUID UUIDWithString:identifier]]};
+
+    // Start advertising over BLE
+    [peripheralManager startAdvertising:advertisingData];
     
     _isBroadcasting = YES;
 }
@@ -175,21 +165,41 @@
 
 - (BOOL)canMonitorBeacons
 {
-    BOOL enabled = [CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]];
-    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
-    BOOL allowed = (status == kCLAuthorizationStatusAuthorized || status == kCLAuthorizationStatusNotDetermined);
-    
-    if (!enabled || !allowed)
-        INLog(@"Cannot monitor beacons: [%d,%d]", enabled, status);
-    
-    
-    return enabled && allowed;
+    return YES;
 }
+
+#pragma mark - CBCentralManagerDelegate
+- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral
+     advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
+{
+    NSLog(@"did discover peripheral: %@, data: %@, %1.2f", peripheral, advertisementData, [RSSI floatValue]);
+    
+    INDetectorRange detectedRange = [self convertRSSItoINProximity:[RSSI floatValue]];
+
+    if (previousRange != detectedRange) {
+        previousRange = detectedRange;
+        
+        [self performBlockOnDelegates:^(id<INBeaconServiceDelegate> delegate) {
+            [delegate service:self foundDeviceWithRange:detectedRange];
+        }];
+    }
+}
+
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central
+{
+    NSLog(@"-- central state changed: %@", centralManager.stateString);
+    
+    if (central.state == CBCentralManagerStatePoweredOn) {
+        [self startScanning];
+    }
+
+}
+#pragma mark -
 
 #pragma mark - CBPeripheralManagerDelegate
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
 {
-    INLog(@"-- bluetooth state changed: %@", peripheral.stateString);
+    INLog(@"-- peripheral state changed: %@", peripheral.stateString);
     
     if (peripheral.state == CBPeripheralManagerStatePoweredOn) {
         [self startAdvertising];
@@ -205,71 +215,22 @@
 }
 #pragma mark -
 
-#pragma mark - CLLocationManagerDelegate
-- (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons
-               inRegion:(CLBeaconRegion *)region
+BOOL inRange(NSInteger start, NSInteger end, NSInteger target)
 {
-    CLBeacon *nearestBeacon = [beacons firstObject];
-    if (nearestBeacon) {
-        INLog(@"nearestBeacon proximity: %@", nearestBeacon.proximityString);
-        
-        INDetectorRange convertedRange = [self convertCLProximitytoINProximity:nearestBeacon.proximity];
-        
-        [self performBlockOnDelegates:^(id<INBeaconServiceDelegate> delegate) {
-            [delegate service:self foundDeviceWithRange:convertedRange];
-        }];
-    }
+    return target >= start && target <= end;
 }
 
-- (void)locationManager:(CLLocationManager *)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
-              withError:(NSError *)error
+- (INDetectorRange)convertRSSItoINProximity:(NSInteger)proximity
 {
-    INLog(@"Error with beacon region: %@ - %@", region, [error localizedDescription]);
-}
-
-
-
-- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
-{
-    CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
-    INLog(@"did enter region: %@", beaconRegion.proximityUUID);
-}
-
-- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
-{
-    CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
-    INLog(@"did exit region: %@", beaconRegion.proximityUUID);
+    [[ConsoleView singleton] logStringWithFormat:@"proximity: %d", proximity];
     
-    [locationManager stopRangingBeaconsInRegion:beaconRegion];
-    INLog(@"stopping range of beacon");
-}
-
-- (void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region
-              withError:(NSError *)error
-{
-    CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
-    INLog(@"Error while monitoring region: %@ - error: %@", beaconRegion.proximityUUID, [error localizedDescription]);
-}
-#pragma mark -
-
-- (INDetectorRange)convertCLProximitytoINProximity:(CLProximity)proximity
-{
-    switch (proximity) {
-        case CLProximityFar:
-            return INDetectorRangeFar;
-            break;
-            
-        case CLProximityImmediate:
-            return INDetectorRangeImmediate;
-            break;
-            
-        case CLProximityNear:
-            return INDetectorRangeNear;
-            break;
-            
-        case CLProximityUnknown:
-            return INDetectorRangeUnknown;
-            break;
-    }
+    if (inRange(-70, -20, proximity))
+        return INDetectorRangeImmediate;
+    if (inRange(-100, -71, proximity))
+        return INDetectorRangeNear;
+    if (inRange(-999, -101, proximity))
+        return INDetectorRangeFar;
+    
+    return INDetectorRangeUnknown;
 }
 @end

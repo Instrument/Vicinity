@@ -58,6 +58,7 @@
 		351FBC5F1820434A00299A5A /* mode_button_detecting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC5B1820434A00299A5A /* mode_button_detecting@2x.png */; };
 		355B19D9182B082E00B71F7D /* CBPeripheralManager+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 355B19D8182B082E00B71F7D /* CBPeripheralManager+Ext.m */; };
 		356B50A51829972D00318DF1 /* BeaconCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 356B50A41829972D00318DF1 /* BeaconCircleView.m */; };
+		3590AB591832B29E00CBAFB3 /* CBCentralManager+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 3590AB581832B29E00CBAFB3 /* CBCentralManager+Ext.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,6 +176,8 @@
 		355B19D8182B082E00B71F7D /* CBPeripheralManager+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBPeripheralManager+Ext.m"; sourceTree = "<group>"; };
 		356B50A31829972D00318DF1 /* BeaconCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconCircleView.h; sourceTree = "<group>"; };
 		356B50A41829972D00318DF1 /* BeaconCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconCircleView.m; sourceTree = "<group>"; };
+		3590AB571832B29E00CBAFB3 /* CBCentralManager+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CBCentralManager+Ext.h"; sourceTree = "<group>"; };
+		3590AB581832B29E00CBAFB3 /* CBCentralManager+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBCentralManager+Ext.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -387,6 +390,8 @@
 				351FBBEF181ADE9D00299A5A /* CLBeacon+Ext.m */,
 				355B19D7182B082E00B71F7D /* CBPeripheralManager+Ext.h */,
 				355B19D8182B082E00B71F7D /* CBPeripheralManager+Ext.m */,
+				3590AB571832B29E00CBAFB3 /* CBCentralManager+Ext.h */,
+				3590AB581832B29E00CBAFB3 /* CBCentralManager+Ext.m */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -533,6 +538,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				355B19D9182B082E00B71F7D /* CBPeripheralManager+Ext.m in Sources */,
+				3590AB591832B29E00CBAFB3 /* CBCentralManager+Ext.m in Sources */,
 				351FBC03181EFC8D00299A5A /* GCDUtilities.m in Sources */,
 				351FBC35181EFCAF00299A5A /* UILabel+Ext.m in Sources */,
 				351FBBF4181AFC9C00299A5A /* ConsoleView.m in Sources */,
