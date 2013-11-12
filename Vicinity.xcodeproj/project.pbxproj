@@ -59,6 +59,8 @@
 		355B19D9182B082E00B71F7D /* CBPeripheralManager+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 355B19D8182B082E00B71F7D /* CBPeripheralManager+Ext.m */; };
 		356B50A51829972D00318DF1 /* BeaconCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 356B50A41829972D00318DF1 /* BeaconCircleView.m */; };
 		3590AB591832B29E00CBAFB3 /* CBCentralManager+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 3590AB581832B29E00CBAFB3 /* CBCentralManager+Ext.m */; };
+		3590AB5E1832BD7300CBAFB3 /* INWeightedAverage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3590AB5D1832BD7300CBAFB3 /* INWeightedAverage.m */; };
+		3590AB621832C56F00CBAFB3 /* EasedValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3590AB611832C56F00CBAFB3 /* EasedValue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +180,10 @@
 		356B50A41829972D00318DF1 /* BeaconCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconCircleView.m; sourceTree = "<group>"; };
 		3590AB571832B29E00CBAFB3 /* CBCentralManager+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CBCentralManager+Ext.h"; sourceTree = "<group>"; };
 		3590AB581832B29E00CBAFB3 /* CBCentralManager+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBCentralManager+Ext.m"; sourceTree = "<group>"; };
+		3590AB5C1832BD7300CBAFB3 /* INWeightedAverage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INWeightedAverage.h; sourceTree = "<group>"; };
+		3590AB5D1832BD7300CBAFB3 /* INWeightedAverage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INWeightedAverage.m; sourceTree = "<group>"; };
+		3590AB601832C56F00CBAFB3 /* EasedValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasedValue.h; sourceTree = "<group>"; };
+		3590AB611832C56F00CBAFB3 /* EasedValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasedValue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -346,6 +352,10 @@
 				351FBC02181EFC8D00299A5A /* GCDSingleton.h */,
 				351FBC04181EFC9800299A5A /* ReachabilityService.h */,
 				351FBC05181EFC9800299A5A /* ReachabilityService.m */,
+				3590AB5C1832BD7300CBAFB3 /* INWeightedAverage.h */,
+				3590AB5D1832BD7300CBAFB3 /* INWeightedAverage.m */,
+				3590AB601832C56F00CBAFB3 /* EasedValue.h */,
+				3590AB611832C56F00CBAFB3 /* EasedValue.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -540,10 +550,12 @@
 				355B19D9182B082E00B71F7D /* CBPeripheralManager+Ext.m in Sources */,
 				3590AB591832B29E00CBAFB3 /* CBCentralManager+Ext.m in Sources */,
 				351FBC03181EFC8D00299A5A /* GCDUtilities.m in Sources */,
+				3590AB621832C56F00CBAFB3 /* EasedValue.m in Sources */,
 				351FBC35181EFCAF00299A5A /* UILabel+Ext.m in Sources */,
 				351FBBF4181AFC9C00299A5A /* ConsoleView.m in Sources */,
 				351FBC06181EFC9800299A5A /* ReachabilityService.m in Sources */,
 				351FBC3C181EFD7E00299A5A /* Reachability.m in Sources */,
+				3590AB5E1832BD7300CBAFB3 /* INWeightedAverage.m in Sources */,
 				351FBC30181EFCAF00299A5A /* UIScreen+Ext.m in Sources */,
 				351FBBF0181ADE9D00299A5A /* CLBeacon+Ext.m in Sources */,
 				356B50A51829972D00318DF1 /* BeaconCircleView.m in Sources */,

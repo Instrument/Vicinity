@@ -13,6 +13,8 @@
 #import "CBCentralManager+Ext.h"
 #import "GCDSingleton.h"
 #import "ConsoleView.h"
+#import "INWeightedAverage.h"
+#import "EasedValue.h"
 
 #define ENABLE_REGION_BOUNDRY NO
 
@@ -29,6 +31,8 @@
     NSMutableSet *delegates;
     
     INDetectorRange previousRange;
+    INWeightedAverage *averageProximity;
+    EasedValue *easedProximity;
 }
 
 #pragma mark Singleton
@@ -46,6 +50,9 @@
     if ((self = [super init])) {
         identifier = theIdentifier;
         delegates = [[NSMutableSet alloc] init];
+        
+        averageProximity = [[INWeightedAverage alloc] init];
+        easedProximity = [[EasedValue alloc] init];
         
     }
     return self;
@@ -172,7 +179,7 @@
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral
      advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
-    NSLog(@"did discover peripheral: %@, data: %@, %1.2f", peripheral, advertisementData, [RSSI floatValue]);
+//    NSLog(@"did discover peripheral: %@, data: %@, %1.2f", peripheral, advertisementData, [RSSI floatValue]);
     
     INDetectorRange detectedRange = [self convertRSSItoINProximity:[RSSI floatValue]];
 
@@ -222,13 +229,21 @@ BOOL inRange(NSInteger start, NSInteger end, NSInteger target)
 
 - (INDetectorRange)convertRSSItoINProximity:(NSInteger)proximity
 {
-    [[ConsoleView singleton] logStringWithFormat:@"proximity: %d", proximity];
+    easedProximity.value = fabsf(proximity);
+    [easedProximity update];
     
-    if (inRange(-70, -20, proximity))
+//    [averageProximity addValue:proximity];
+//    proximity = [averageProximity weightedAverage];
+
+    proximity = easedProximity.value * -1.0f;
+    
+    INLog(@"proximity: %d", proximity);
+    
+    if (inRange(-58, -20, proximity))
         return INDetectorRangeImmediate;
-    if (inRange(-100, -71, proximity))
+    if (inRange(-70, -59, proximity))
         return INDetectorRangeNear;
-    if (inRange(-999, -101, proximity))
+    if (inRange(-999, -71, proximity))
         return INDetectorRangeFar;
     
     return INDetectorRangeUnknown;
