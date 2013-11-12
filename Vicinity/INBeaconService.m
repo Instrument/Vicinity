@@ -11,11 +11,13 @@
 #import "CLBeacon+Ext.h"
 #import "CBPeripheralManager+Ext.h"
 #import "CBCentralManager+Ext.h"
+#import "CBUUID+Ext.h"
+
 #import "GCDSingleton.h"
 #import "ConsoleView.h"
 #import "EasedValue.h"
 
-#define ENABLE_REGION_BOUNDRY NO
+#define DEBUG_PERIPHERAL NO
 
 @interface INBeaconService() <CBPeripheralManagerDelegate, CBCentralManagerDelegate>
 @end
@@ -85,6 +87,7 @@
 
 - (void)startScanning
 {
+    
     NSDictionary *scanOptions = @{CBCentralManagerScanOptionAllowDuplicatesKey:@(YES)};
     NSArray *services = @[[CBUUID UUIDWithString:identifier]];
     
@@ -136,7 +139,7 @@
 
     NSDictionary *advertisingData = @{CBAdvertisementDataLocalNameKey:@"vicinity-peripheral",
                                       CBAdvertisementDataServiceUUIDsKey:@[[CBUUID UUIDWithString:identifier]]};
-
+    
     // Start advertising over BLE
     [peripheralManager startAdvertising:advertisingData];
     
@@ -177,7 +180,12 @@
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral
      advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
-//    NSLog(@"did discover peripheral: %@, data: %@, %1.2f", peripheral, advertisementData, [RSSI floatValue]);
+    if (DEBUG_PERIPHERAL) {
+        NSLog(@"did discover peripheral: %@, data: %@, %1.2f", [peripheral.identifier UUIDString], advertisementData, [RSSI floatValue]);
+        
+        CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
+        NSLog(@"service uuid: %@", [uuid representativeString]);
+    }
     
     INDetectorRange detectedRange = [self convertRSSItoINProximity:[RSSI floatValue]];
 

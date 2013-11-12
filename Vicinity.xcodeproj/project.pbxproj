@@ -61,6 +61,7 @@
 		3590AB591832B29E00CBAFB3 /* CBCentralManager+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 3590AB581832B29E00CBAFB3 /* CBCentralManager+Ext.m */; };
 		3590AB5E1832BD7300CBAFB3 /* INWeightedAverage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3590AB5D1832BD7300CBAFB3 /* INWeightedAverage.m */; };
 		3590AB621832C56F00CBAFB3 /* EasedValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3590AB611832C56F00CBAFB3 /* EasedValue.m */; };
+		3590AB651832D98A00CBAFB3 /* CBUUID+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 3590AB641832D98A00CBAFB3 /* CBUUID+Ext.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -184,6 +185,8 @@
 		3590AB5D1832BD7300CBAFB3 /* INWeightedAverage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INWeightedAverage.m; sourceTree = "<group>"; };
 		3590AB601832C56F00CBAFB3 /* EasedValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasedValue.h; sourceTree = "<group>"; };
 		3590AB611832C56F00CBAFB3 /* EasedValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasedValue.m; sourceTree = "<group>"; };
+		3590AB631832D98A00CBAFB3 /* CBUUID+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CBUUID+Ext.h"; sourceTree = "<group>"; };
+		3590AB641832D98A00CBAFB3 /* CBUUID+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBUUID+Ext.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -402,6 +405,8 @@
 				355B19D8182B082E00B71F7D /* CBPeripheralManager+Ext.m */,
 				3590AB571832B29E00CBAFB3 /* CBCentralManager+Ext.h */,
 				3590AB581832B29E00CBAFB3 /* CBCentralManager+Ext.m */,
+				3590AB631832D98A00CBAFB3 /* CBUUID+Ext.h */,
+				3590AB641832D98A00CBAFB3 /* CBUUID+Ext.m */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -578,6 +583,7 @@
 				351FBC4B181F244A00299A5A /* FindDeviceViewController.m in Sources */,
 				3509B99B1819C0E70093F714 /* ViewController.m in Sources */,
 				351FBBFE181EFC3A00299A5A /* INBeaconService.m in Sources */,
+				3590AB651832D98A00CBAFB3 /* CBUUID+Ext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
