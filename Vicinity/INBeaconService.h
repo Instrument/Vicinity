@@ -19,12 +19,12 @@ typedef enum {
 
 @class INBeaconService;
 @protocol INBeaconServiceDelegate <NSObject>
-- (void)service:(INBeaconService *)service foundDeviceWithRange:(INDetectorRange)range;
+- (void)service:(INBeaconService *)service foundDeviceUUID:(NSString *)uuid withRange:(INDetectorRange)range;
 @end
 
 @interface INBeaconService : NSObject
 
-- (id)initWithIdentifier:(NSString *)theIdentifier;
+- (id)initWithIdentifiers:(NSArray *)theIdentifiers;
 
 - (void)addDelegate:(id<INBeaconServiceDelegate>)delegate;
 - (void)removeDelegate:(id<INBeaconServiceDelegate>)delegate;

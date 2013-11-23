@@ -24,14 +24,12 @@
 
 @implementation INBeaconService
 {
-    NSString *identifier;
+    NSArray *identifiers;
     
     CBCentralManager *centralManager;
     CBPeripheralManager *peripheralManager;
     
     NSMutableSet *delegates;
-    
-    INDetectorRange previousRange;
 
     EasedValue *easedProximity;
 }
@@ -40,16 +38,16 @@
 + (INBeaconService *)singleton
 {
     DEFINE_SHARED_INSTANCE_USING_BLOCK(^{
-        return [[self alloc] initWithIdentifier:SINGLETON_IDENTIFIER];
+        return [[self alloc] initWithIdentifiers:@[SINGLETON_IDENTIFIER]];
     });
 }
 #pragma mark -
 
 
-- (id)initWithIdentifier:(NSString *)theIdentifier
+- (id)initWithIdentifiers:(NSArray *)theIdentifiers
 {
     if ((self = [super init])) {
-        identifier = theIdentifier;
+        identifiers = [INBeaconService convertStringIdentifiersToCBUUIDArray:theIdentifiers];
         delegates = [[NSMutableSet alloc] init];
         
         easedProximity = [[EasedValue alloc] init];
@@ -89,9 +87,9 @@
 {
     
     NSDictionary *scanOptions = @{CBCentralManagerScanOptionAllowDuplicatesKey:@(YES)};
-    NSArray *services = @[[CBUUID UUIDWithString:identifier]];
     
-    [centralManager scanForPeripheralsWithServices:services options:scanOptions];
+    
+    [centralManager scanForPeripheralsWithServices:identifiers options:scanOptions];
     _isDetecting = YES;
 }
 
@@ -125,6 +123,13 @@
 {
     if (!centralManager)
         centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:Nil options:nil];
+    
+    // tell delegates to reset range
+    for( CBUUID *uuid in identifiers) {
+        [self performBlockOnDelegates:^(id<INBeaconServiceDelegate> delegate) {
+            [delegate service:self foundDeviceUUID:[uuid representativeString] withRange:INDetectorRangeUnknown];
+        }];
+    }
 }
 
 - (void)startBluetoothBroadcast
@@ -138,24 +143,12 @@
 {
 
     NSDictionary *advertisingData = @{CBAdvertisementDataLocalNameKey:@"vicinity-peripheral",
-                                      CBAdvertisementDataServiceUUIDsKey:@[[CBUUID UUIDWithString:identifier]]};
+                                      CBAdvertisementDataServiceUUIDsKey:identifiers};
     
     // Start advertising over BLE
     [peripheralManager startAdvertising:advertisingData];
     
     _isBroadcasting = YES;
-}
-
-- (CLBeaconRegion *)beacon
-{
-    NSUUID *proximityUUID = [[NSUUID alloc]
-                             initWithUUIDString:identifier];
-    
-    CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc]
-                                    initWithProximityUUID:proximityUUID
-                                    identifier:@"com.weareinstrument.vicinity"];
-    
-    return beaconRegion;
 }
 
 - (BOOL)canBroadcast
@@ -187,15 +180,20 @@
         NSLog(@"service uuid: %@", [uuid representativeString]);
     }
     
+    CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
+    
     INDetectorRange detectedRange = [self convertRSSItoINProximity:[RSSI floatValue]];
-
-    if (previousRange != detectedRange) {
-        previousRange = detectedRange;
-        
-        [self performBlockOnDelegates:^(id<INBeaconServiceDelegate> delegate) {
-            [delegate service:self foundDeviceWithRange:detectedRange];
-        }];
-    }
+    
+    
+    [self performBlockOnDelegates:^(id<INBeaconServiceDelegate> delegate) {
+        [delegate service:self foundDeviceUUID:[uuid representativeString] withRange:detectedRange];
+    }];
+    
+    // we do not get notified when beacons disappear
+    // this timer will set the range to 'unknown' if we don't
+    // receive advertisments after 3 seconds
+    [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(didTimeoutBeacon:)
+                                   userInfo:uuid repeats:NO];
 }
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
@@ -208,6 +206,15 @@
 
 }
 #pragma mark -
+
+- (void)didTimeoutBeacon:(NSTimer *)timer
+{
+    CBUUID *timedOutBeacon = timer.userInfo;
+    // reset the device range
+    [self performBlockOnDelegates:^(id<INBeaconServiceDelegate> delegate) {
+        [delegate service:self foundDeviceUUID:[timedOutBeacon representativeString] withRange:INDetectorRangeUnknown];
+    }];
+}
 
 #pragma mark - CBPeripheralManagerDelegate
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
@@ -246,5 +253,16 @@
         return INDetectorRangeImmediate;
     
     return INDetectorRangeUnknown;
+}
+
++ (NSArray *)convertStringIdentifiersToCBUUIDArray:(NSArray *)stringIdentifiers
+{
+    NSMutableArray *services = [[NSMutableArray alloc] init];
+    for (NSString *identifier in stringIdentifiers) {
+        CBUUID *uuid = [CBUUID UUIDWithString:identifier];
+        [services addObject:uuid];
+    }
+    
+    return [[NSArray alloc] initWithArray:services];
 }
 @end

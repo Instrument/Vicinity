@@ -95,7 +95,7 @@
     [targetCircle startAnimationWithDirection:BeaconDirectionDown];
     
     // force initial state
-    [self service:nil foundDeviceWithRange:INDetectorRangeUnknown];
+    [self service:nil foundDeviceUUID:@"" withRange:INDetectorRangeUnknown];
     
     
 }
@@ -106,7 +106,7 @@
 }
 
 #pragma mark - INBeaconServiceDelegate
-- (void)service:(INBeaconService *)service foundDeviceWithRange:(INDetectorRange)range
+- (void)service:(INBeaconService *)service foundDeviceUUID:(NSString *)uuid withRange:(INDetectorRange)range
 {
     
     [UIView animateWithDuration:0.3f animations:^{
