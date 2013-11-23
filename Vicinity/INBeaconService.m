@@ -18,6 +18,8 @@
 #import "EasedValue.h"
 
 #define DEBUG_PERIPHERAL NO
+#define TIMEOUT_INTERVAL 5.0f
+#define UPDATE_INTERVAL 1.0f
 
 @interface INBeaconService() <CBPeripheralManagerDelegate, CBCentralManagerDelegate>
 @end
@@ -25,6 +27,7 @@
 @implementation INBeaconService
 {
     NSArray *identifiers;
+    NSMutableDictionary *identifierRanges;
     
     CBCentralManager *centralManager;
     CBPeripheralManager *peripheralManager;
@@ -32,6 +35,8 @@
     NSMutableSet *delegates;
 
     EasedValue *easedProximity;
+    
+    NSTimer *detectorTimer;
 }
 
 #pragma mark Singleton
@@ -48,6 +53,8 @@
 {
     if ((self = [super init])) {
         identifiers = [INBeaconService convertStringIdentifiersToCBUUIDArray:theIdentifiers];
+        identifierRanges = [[NSMutableDictionary alloc] init];
+        
         delegates = [[NSMutableSet alloc] init];
         
         easedProximity = [[EasedValue alloc] init];
@@ -99,6 +106,9 @@
     
     [centralManager stopScan];
     centralManager = nil;
+    
+    [detectorTimer invalidate];
+    detectorTimer = nil;
 }
 
 - (void)startBroadcasting
@@ -124,12 +134,8 @@
     if (!centralManager)
         centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:Nil options:nil];
     
-    // tell delegates to reset range
-    for( CBUUID *uuid in identifiers) {
-        [self performBlockOnDelegates:^(id<INBeaconServiceDelegate> delegate) {
-            [delegate service:self foundDeviceUUID:[uuid representativeString] withRange:INDetectorRangeUnknown];
-        }];
-    }
+    detectorTimer = [NSTimer scheduledTimerWithTimeInterval:UPDATE_INTERVAL target:self
+                                                   selector:@selector(reportRanges:) userInfo:nil repeats:YES];
 }
 
 - (void)startBluetoothBroadcast
@@ -181,19 +187,11 @@
     }
     
     CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
+    NSString *uuidString = [uuid representativeString];
     
     INDetectorRange detectedRange = [self convertRSSItoINProximity:[RSSI floatValue]];
     
-    
-    [self performBlockOnDelegates:^(id<INBeaconServiceDelegate> delegate) {
-        [delegate service:self foundDeviceUUID:[uuid representativeString] withRange:detectedRange];
-    }];
-    
-    // we do not get notified when beacons disappear
-    // this timer will set the range to 'unknown' if we don't
-    // receive advertisments after 3 seconds
-    [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(didTimeoutBeacon:)
-                                   userInfo:uuid repeats:NO];
+    identifierRanges[uuidString] = @(detectedRange);
 }
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
@@ -207,13 +205,25 @@
 }
 #pragma mark -
 
+- (void)reportRanges:(NSTimer *)timer
+{
+    for (NSString *uuid in identifierRanges.allKeys) {
+        [self performBlockOnDelegates:^(id<INBeaconServiceDelegate>delegate) {
+            INDetectorRange range = [identifierRanges[uuid] intValue];
+            [delegate service:self foundDeviceUUID:uuid withRange:range];
+            
+            [NSTimer scheduledTimerWithTimeInterval:TIMEOUT_INTERVAL target:self selector:@selector(didTimeoutBeacon:)
+                                           userInfo:uuid repeats:NO];
+        }];
+    }
+}
+
 - (void)didTimeoutBeacon:(NSTimer *)timer
 {
-    CBUUID *timedOutBeacon = timer.userInfo;
-    // reset the device range
-    [self performBlockOnDelegates:^(id<INBeaconServiceDelegate> delegate) {
-        [delegate service:self foundDeviceUUID:[timedOutBeacon representativeString] withRange:INDetectorRangeUnknown];
-    }];
+    // timeout the beacon to unknown position
+    // it it's still active it will be updated by central delegate "didDiscoverPeripheral"
+    NSString *timedOutBeacon = timer.userInfo;
+    identifierRanges[timedOutBeacon] = @(INDetectorRangeUnknown);
 }
 
 #pragma mark - CBPeripheralManagerDelegate
