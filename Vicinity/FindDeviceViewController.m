@@ -92,12 +92,7 @@
     [[INBeaconService singleton] addDelegate:self];
     [[INBeaconService singleton] startDetecting];
     
-    [targetCircle startAnimationWithDirection:BeaconDirectionDown];
-    
-    // force initial state
-    [self service:nil foundDeviceUUID:@"" withRange:INDetectorRangeUnknown];
-    
-    
+    [self changeInterfaceToDetectMode];
 }
 
 - (NSUInteger)supportedInterfaceOrientations
