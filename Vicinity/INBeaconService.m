@@ -17,7 +17,7 @@
 #import "ConsoleView.h"
 #import "EasedValue.h"
 
-#define DEBUG_PERIPHERAL YES
+#define DEBUG_PERIPHERAL NO
 #define TIMEOUT_INTERVAL 5.0f
 #define UPDATE_INTERVAL 1.0f
 
