@@ -17,7 +17,7 @@
 #import "ConsoleView.h"
 #import "EasedValue.h"
 
-#define DEBUG_PERIPHERAL NO
+#define DEBUG_PERIPHERAL YES
 #define TIMEOUT_INTERVAL 5.0f
 #define UPDATE_INTERVAL 1.0f
 
@@ -187,6 +187,12 @@
     }
     
     CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
+    
+    // ignore this update if UUID was not specificed
+    // this happens when the BLE service wasn't included in the advertisement
+    if (!uuid)
+        return;
+    
     NSString *uuidString = [uuid representativeString];
     
     INDetectorRange detectedRange = [self convertRSSItoINProximity:[RSSI floatValue]];
