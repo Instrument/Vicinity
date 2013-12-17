@@ -13,11 +13,6 @@
 		3509B98E1819C0E70093F714 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3509B98D1819C0E70093F714 /* main.m */; };
 		3509B9921819C0E70093F714 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3509B9911819C0E70093F714 /* AppDelegate.m */; };
 		3509B99B1819C0E70093F714 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3509B99A1819C0E70093F714 /* ViewController.m */; };
-		3509B9A41819C0E70093F714 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3509B9A31819C0E70093F714 /* XCTest.framework */; };
-		3509B9A51819C0E70093F714 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3509B9811819C0E70093F714 /* Foundation.framework */; };
-		3509B9A61819C0E70093F714 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3509B9851819C0E70093F714 /* UIKit.framework */; };
-		3509B9AE1819C0E70093F714 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3509B9AC1819C0E70093F714 /* InfoPlist.strings */; };
-		3509B9B01819C0E70093F714 /* VicinityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3509B9AF1819C0E70093F714 /* VicinityTests.m */; };
 		3509B9BA1819C3AE0093F714 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3509B9B91819C3AE0093F714 /* CoreLocation.framework */; };
 		3509B9BC1819C61B0093F714 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3509B9BB1819C61B0093F714 /* CoreBluetooth.framework */; };
 		3509BA0F1819DB330093F714 /* libEasyLayoutLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3509BA071819D66B0093F714 /* libEasyLayoutLibrary.a */; };
@@ -65,13 +60,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3509B9A71819C0E70093F714 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3509B9761819C0E70093F714 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3509B97D1819C0E70093F714;
-			remoteInfo = Vicinity;
-		};
 		3509BA061819D66B0093F714 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3509BA011819D66B0093F714 /* EasyLayoutLibrary.xcodeproj */;
@@ -107,11 +95,7 @@
 		3509B9911819C0E70093F714 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3509B9991819C0E70093F714 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		3509B99A1819C0E70093F714 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		3509B9A21819C0E70093F714 /* VicinityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VicinityTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3509B9A31819C0E70093F714 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		3509B9AB1819C0E70093F714 /* VicinityTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VicinityTests-Info.plist"; sourceTree = "<group>"; };
-		3509B9AD1819C0E70093F714 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3509B9AF1819C0E70093F714 /* VicinityTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VicinityTests.m; sourceTree = "<group>"; };
 		3509B9B91819C3AE0093F714 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3509B9BB1819C61B0093F714 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		3509BA011819D66B0093F714 /* EasyLayoutLibrary.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EasyLayoutLibrary.xcodeproj; path = ../EasyLayout/EasyLayoutLibrary.xcodeproj; sourceTree = "<group>"; };
@@ -203,16 +187,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3509B99F1819C0E70093F714 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3509B9A41819C0E70093F714 /* XCTest.framework in Frameworks */,
-				3509B9A61819C0E70093F714 /* UIKit.framework in Frameworks */,
-				3509B9A51819C0E70093F714 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -223,7 +197,6 @@
 				351FBBE7181AD13600299A5A /* Resources */,
 				3509B9881819C0E70093F714 /* Supporting Files */,
 				351FBC39181EFD7400299A5A /* 3rd Party */,
-				3509B9A91819C0E70093F714 /* VicinityTests */,
 				3509B9801819C0E70093F714 /* Frameworks */,
 				3509B97F1819C0E70093F714 /* Products */,
 				3509BA011819D66B0093F714 /* EasyLayoutLibrary.xcodeproj */,
@@ -234,7 +207,6 @@
 			isa = PBXGroup;
 			children = (
 				3509B97E1819C0E70093F714 /* Vicinity.app */,
-				3509B9A21819C0E70093F714 /* VicinityTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -279,24 +251,6 @@
 			);
 			name = "Supporting Files";
 			path = Vicinity;
-			sourceTree = "<group>";
-		};
-		3509B9A91819C0E70093F714 /* VicinityTests */ = {
-			isa = PBXGroup;
-			children = (
-				3509B9AF1819C0E70093F714 /* VicinityTests.m */,
-				3509B9AA1819C0E70093F714 /* Supporting Files */,
-			);
-			path = VicinityTests;
-			sourceTree = "<group>";
-		};
-		3509B9AA1819C0E70093F714 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				3509B9AB1819C0E70093F714 /* VicinityTests-Info.plist */,
-				3509B9AC1819C0E70093F714 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		3509BA021819D66B0093F714 /* Products */ = {
@@ -442,24 +396,6 @@
 			productReference = 3509B97E1819C0E70093F714 /* Vicinity.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3509B9A11819C0E70093F714 /* VicinityTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3509B9B61819C0E70093F714 /* Build configuration list for PBXNativeTarget "VicinityTests" */;
-			buildPhases = (
-				3509B99E1819C0E70093F714 /* Sources */,
-				3509B99F1819C0E70093F714 /* Frameworks */,
-				3509B9A01819C0E70093F714 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3509B9A81819C0E70093F714 /* PBXTargetDependency */,
-			);
-			name = VicinityTests;
-			productName = VicinityTests;
-			productReference = 3509B9A21819C0E70093F714 /* VicinityTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -469,11 +405,6 @@
 				CLASSPREFIX = IN;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Instrument;
-				TargetAttributes = {
-					3509B9A11819C0E70093F714 = {
-						TestTargetID = 3509B97D1819C0E70093F714;
-					};
-				};
 			};
 			buildConfigurationList = 3509B9791819C0E70093F714 /* Build configuration list for PBXProject "Vicinity" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -495,7 +426,6 @@
 			projectRoot = "";
 			targets = (
 				3509B97D1819C0E70093F714 /* Vicinity */,
-				3509B9A11819C0E70093F714 /* VicinityTests */,
 			);
 		};
 /* End PBXProject section */
@@ -534,14 +464,6 @@
 				351FBC5C1820434A00299A5A /* mode_button_broadcasting.png in Resources */,
 				351FBBEC181AD15800299A5A /* Default-568h@2x.png in Resources */,
 				351FBC47181F23A100299A5A /* ring.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3509B9A01819C0E70093F714 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3509B9AE1819C0E70093F714 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -587,39 +509,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3509B99E1819C0E70093F714 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3509B9B01819C0E70093F714 /* VicinityTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3509B9A81819C0E70093F714 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3509B97D1819C0E70093F714 /* Vicinity */;
-			targetProxy = 3509B9A71819C0E70093F714 /* PBXContainerItemProxy */;
-		};
 		3509BA0B1819D6830093F714 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = EasyLayoutLibrary;
 			targetProxy = 3509BA0A1819D6830093F714 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		3509B9AC1819C0E70093F714 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3509B9AD1819C0E70093F714 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		3509B9B11819C0E70093F714 /* Debug */ = {
@@ -639,6 +537,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -657,6 +556,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "EF53D92B-B2CA-4E66-80CA-F0DE615F7742";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -679,6 +579,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -690,6 +591,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PROVISIONING_PROFILE = "EF53D92B-B2CA-4E66-80CA-F0DE615F7742";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -706,7 +608,7 @@
 				INFOPLIST_FILE = "Vicinity/Vicinity-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3D0A5173-3D1C-4985-A891-597586AD790E";
+				PROVISIONING_PROFILE = "EF53D92B-B2CA-4E66-80CA-F0DE615F7742";
 				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/include/EasyLayoutLibrary";
 				WRAPPER_EXTENSION = app;
 			};
@@ -728,48 +630,6 @@
 			};
 			name = Release;
 		};
-		3509B9B71819C0E70093F714 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Vicinity.app/Vicinity";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Vicinity/Vicinity-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "VicinityTests/VicinityTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		3509B9B81819C0E70093F714 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Vicinity.app/Vicinity";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Vicinity/Vicinity-Prefix.pch";
-				INFOPLIST_FILE = "VicinityTests/VicinityTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -787,15 +647,6 @@
 			buildConfigurations = (
 				3509B9B41819C0E70093F714 /* Debug */,
 				3509B9B51819C0E70093F714 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3509B9B61819C0E70093F714 /* Build configuration list for PBXNativeTarget "VicinityTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3509B9B71819C0E70093F714 /* Debug */,
-				3509B9B81819C0E70093F714 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
