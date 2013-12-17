@@ -1,14 +1,12 @@
 //
 //  EasedValue.m
-//  SpeedometerArc
+//  
 //
 //  Created by Ben Purdy on 1/31/13.
 //  Copyright (c) 2013 Instrument. All rights reserved.
 //
 
 #import "EasedValue.h"
-
-#define DEBUG_EASE NO
 
 @implementation EasedValue
 {
@@ -28,7 +26,8 @@
     return self;
 }
 
-- (void)setValue:(CGFloat)value {
+- (void)setValue:(CGFloat)value
+{
     targetValue = value;
 }
 
@@ -39,36 +38,22 @@
 
 - (void)update
 {
-    if (DEBUG_EASE) {
-        NSLog(@"-- BEGIN update --");
-        
-        NSLog(@"velocity: %1.2f, target value: %1.2f, currentValue: %1.2f", velocity, targetValue, currentValue);
-    }
-    
+    // determine speed at which the ease will happen
+    // this is based on difference between target and current value
     velocity += (targetValue - currentValue) * 0.01f;
     velocity *= 0.7f;
     
-    if (DEBUG_EASE)
-        NSLog(@"velocity: %1.2f, currentValue: %1.2f", velocity, currentValue);
-    
+    // ease the current value
     currentValue += velocity;
     
+    // limit how small the ease can get
     if(fabsf(targetValue - currentValue) < 0.001f){
         currentValue = targetValue;
         velocity = 0.0f;
     }
     
-    if (DEBUG_EASE)
-        NSLog(@"velocity: %1.2f, currentValue: %1.2f", velocity, currentValue);
-    
     // keep above zero
     currentValue = MAX(0.0f, currentValue);
-    
-    if (DEBUG_EASE) {
-        NSLog(@"currentValue: %1.2f", currentValue);
-    
-        NSLog(@"-- END update --\n\n");
-    }
 }
 
 - (void)reset
