@@ -20,8 +20,8 @@ The heart of this is `INBeaconService`.  This replicates how iBeacons work by an
 
 Getting this to work effectively required a two things:
 
-1) interpreting the RSSI values reliably, taking into account sensor noise and signal spikes
-2) converting the RSSI values to distances
+1. interpreting the RSSI values reliably, taking into account sensor noise and signal spikes
+1. converting the RSSI values to distances
 
 ## Signal Noise
 
