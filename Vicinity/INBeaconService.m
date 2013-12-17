@@ -17,8 +17,10 @@
 #import "ConsoleView.h"
 #import "EasedValue.h"
 
+#define DEBUG_CENTRAL NO
 #define DEBUG_PERIPHERAL NO
-#define TIMEOUT_INTERVAL 5.0f
+#define DEBUG_PROXIMITY NO
+
 #define UPDATE_INTERVAL 1.0f
 
 @interface INBeaconService() <CBPeripheralManagerDelegate, CBCentralManagerDelegate>
@@ -26,39 +28,44 @@
 
 @implementation INBeaconService
 {
-    NSArray *identifiers;
-    NSMutableDictionary *identifierRanges;
+    CBUUID *identifier;
+    INDetectorRange identifierRange;
     
     CBCentralManager *centralManager;
     CBPeripheralManager *peripheralManager;
     
     NSMutableSet *delegates;
-
+    
     EasedValue *easedProximity;
     
     NSTimer *detectorTimer;
+    
+    BOOL bluetoothIsEnabledAndAuthorized;
+    NSTimer *authorizationTimer;
 }
 
 #pragma mark Singleton
 + (INBeaconService *)singleton
 {
     DEFINE_SHARED_INSTANCE_USING_BLOCK(^{
-        return [[self alloc] initWithIdentifiers:@[SINGLETON_IDENTIFIER]];
+        return [[self alloc] initWithIdentifier:SINGLETON_IDENTIFIER];
     });
 }
 #pragma mark -
 
 
-- (id)initWithIdentifiers:(NSArray *)theIdentifiers
+- (id)initWithIdentifier:(NSString *)theIdentifier
 {
     if ((self = [super init])) {
-        identifiers = [INBeaconService convertStringIdentifiersToCBUUIDArray:theIdentifiers];
-        identifierRanges = [[NSMutableDictionary alloc] init];
+        identifier = [CBUUID UUIDWithString:theIdentifier];
         
         delegates = [[NSMutableSet alloc] init];
         
         easedProximity = [[EasedValue alloc] init];
         
+        // use to track changes to this value
+        bluetoothIsEnabledAndAuthorized = [self hasBluetooth];
+        [self startAuthorizationTimer];
     }
     return self;
 }
@@ -75,11 +82,23 @@
 
 - (void)performBlockOnDelegates:(void(^)(id<INBeaconServiceDelegate> delegate))block
 {
+    [self performBlockOnDelegates:block complete:nil];
+}
+
+- (void)performBlockOnDelegates:(void(^)(id<INBeaconServiceDelegate> delegate))block complete:( void(^)(void))complete
+{
     for (id<INBeaconServiceDelegate>delegate in delegates) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            block(delegate);
+            if (block)
+                block(delegate);
         });
     }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (complete)
+            complete();
+    });
+    
 }
 
 - (void)startDetecting
@@ -96,7 +115,7 @@
     NSDictionary *scanOptions = @{CBCentralManagerScanOptionAllowDuplicatesKey:@(YES)};
     
     
-    [centralManager scanForPeripheralsWithServices:identifiers options:scanOptions];
+    [centralManager scanForPeripheralsWithServices:@[identifier] options:scanOptions];
     _isDetecting = YES;
 }
 
@@ -117,7 +136,7 @@
         return;
     
     [self startBluetoothBroadcast];
-
+    
 }
 
 - (void)stopBroadcasting
@@ -132,24 +151,25 @@
 - (void)startDetectingBeacons
 {
     if (!centralManager)
-        centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:Nil options:nil];
+        centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     
     detectorTimer = [NSTimer scheduledTimerWithTimeInterval:UPDATE_INTERVAL target:self
-                                                   selector:@selector(reportRanges:) userInfo:nil repeats:YES];
+                                                   selector:@selector(reportRangesToDelegates:) userInfo:nil repeats:YES];
 }
 
 - (void)startBluetoothBroadcast
 {
     // start broadcasting if it's stopped
-    if (!peripheralManager)
-        peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:nil];
+    if (!peripheralManager) {
+        peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
+    }
 }
 
 - (void)startAdvertising
 {
-
+    
     NSDictionary *advertisingData = @{CBAdvertisementDataLocalNameKey:@"vicinity-peripheral",
-                                      CBAdvertisementDataServiceUUIDsKey:identifiers};
+                                      CBAdvertisementDataServiceUUIDsKey:@[identifier]};
     
     // Start advertising over BLE
     [peripheralManager startAdvertising:advertisingData];
@@ -159,6 +179,12 @@
 
 - (BOOL)canBroadcast
 {
+    // iOS6 can't detect peripheral authorization so just assume it works.
+    // ARC complains if we use @selector because `authorizationStatus` is ambiguous
+    SEL selector = NSSelectorFromString(@"authorizationStatus");
+    if (![[CBPeripheralManager class] respondsToSelector:selector])
+        return YES;
+    
     CBPeripheralManagerAuthorizationStatus status = [CBPeripheralManager authorizationStatus];
     
     BOOL enabled = (status == CBPeripheralManagerAuthorizationStatusAuthorized ||
@@ -186,56 +212,39 @@
         NSLog(@"service uuid: %@", [uuid representativeString]);
     }
     
-    CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
-    
-    // ignore this update if UUID was not specificed
-    // this happens when the BLE service wasn't included in the advertisement
-    if (!uuid)
-        return;
-    
-    NSString *uuidString = [uuid representativeString];
-    
-    INDetectorRange detectedRange = [self convertRSSItoINProximity:[RSSI floatValue]];
-    
-    identifierRanges[uuidString] = @(detectedRange);
+    identifierRange = [self convertRSSItoINProximity:[RSSI floatValue]];
 }
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
-    NSLog(@"-- central state changed: %@", centralManager.stateString);
+    if (DEBUG_CENTRAL)
+        NSLog(@"-- central state changed: %@", centralManager.stateString);
     
     if (central.state == CBCentralManagerStatePoweredOn) {
         [self startScanning];
     }
-
+    
 }
 #pragma mark -
 
-- (void)reportRanges:(NSTimer *)timer
+- (void)reportRangesToDelegates:(NSTimer *)timer
 {
-    for (NSString *uuid in identifierRanges.allKeys) {
-        [self performBlockOnDelegates:^(id<INBeaconServiceDelegate>delegate) {
-            INDetectorRange range = [identifierRanges[uuid] intValue];
-            [delegate service:self foundDeviceUUID:uuid withRange:range];
-            
-            [NSTimer scheduledTimerWithTimeInterval:TIMEOUT_INTERVAL target:self selector:@selector(didTimeoutBeacon:)
-                                           userInfo:uuid repeats:NO];
-        }];
-    }
-}
-
-- (void)didTimeoutBeacon:(NSTimer *)timer
-{
-    // timeout the beacon to unknown position
-    // it it's still active it will be updated by central delegate "didDiscoverPeripheral"
-    NSString *timedOutBeacon = timer.userInfo;
-    identifierRanges[timedOutBeacon] = @(INDetectorRangeUnknown);
+    [self performBlockOnDelegates:^(id<INBeaconServiceDelegate>delegate) {
+        
+        [delegate service:self foundDeviceUUID:[identifier representativeString] withRange:identifierRange];
+        
+    } complete:^{
+        // timeout the beacon to unknown position
+        // it it's still active it will be updated by central delegate "didDiscoverPeripheral"
+        identifierRange = INDetectorRangeUnknown;
+    }];
 }
 
 #pragma mark - CBPeripheralManagerDelegate
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
 {
-    INLog(@"-- peripheral state changed: %@", peripheral.stateString);
+    if (DEBUG_PERIPHERAL)
+        INLog(@"-- peripheral state changed: %@", peripheral.stateString);
     
     if (peripheral.state == CBPeripheralManagerStatePoweredOn) {
         [self startAdvertising];
@@ -244,10 +253,12 @@
 
 - (void)peripheralManagerDidStartAdvertising:(CBPeripheralManager *)peripheral error:(NSError *)error
 {
-    if (error)
-        INLog(@"error starting advertising: %@", [error localizedDescription]);
-    else
-        INLog(@"did start advertising");
+    if (DEBUG_PERIPHERAL) {
+        if (error)
+            INLog(@"error starting advertising: %@", [error localizedDescription]);
+        else
+            INLog(@"did start advertising");
+    }
 }
 #pragma mark -
 
@@ -258,7 +269,8 @@
     [easedProximity update];
     proximity = easedProximity.value * -1.0f;
     
-    INLog(@"proximity: %d", proximity);
+    if (DEBUG_PROXIMITY)
+        INLog(@"proximity: %d", proximity);
     
     
     if (proximity < -70)
@@ -271,14 +283,27 @@
     return INDetectorRangeUnknown;
 }
 
-+ (NSArray *)convertStringIdentifiersToCBUUIDArray:(NSArray *)stringIdentifiers
+- (BOOL)hasBluetooth
 {
-    NSMutableArray *services = [[NSMutableArray alloc] init];
-    for (NSString *identifier in stringIdentifiers) {
-        CBUUID *uuid = [CBUUID UUIDWithString:identifier];
-        [services addObject:uuid];
+    return [self canBroadcast] && peripheralManager.state == CBPeripheralManagerStatePoweredOn;
+}
+
+- (void)startAuthorizationTimer
+{
+    authorizationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self
+                                                        selector:@selector(checkBluetoothAuth:)
+                                                        userInfo:nil repeats:YES];
+}
+
+- (void)checkBluetoothAuth:(NSTimer *)timer
+{
+    if (bluetoothIsEnabledAndAuthorized != [self hasBluetooth]) {
+        
+        bluetoothIsEnabledAndAuthorized = [self hasBluetooth];
+        [self performBlockOnDelegates:^(id<INBeaconServiceDelegate>delegate) {
+            if ([delegate respondsToSelector:@selector(service:bluetoothAvailable:)])
+                [delegate service:self bluetoothAvailable:bluetoothIsEnabledAndAuthorized];
+        }];
     }
-    
-    return [[NSArray alloc] initWithArray:services];
 }
 @end
