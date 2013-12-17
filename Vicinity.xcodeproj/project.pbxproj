@@ -12,7 +12,6 @@
 		3509B9861819C0E70093F714 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3509B9851819C0E70093F714 /* UIKit.framework */; };
 		3509B98E1819C0E70093F714 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3509B98D1819C0E70093F714 /* main.m */; };
 		3509B9921819C0E70093F714 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3509B9911819C0E70093F714 /* AppDelegate.m */; };
-		3509B99B1819C0E70093F714 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3509B99A1819C0E70093F714 /* ViewController.m */; };
 		3509B9BA1819C3AE0093F714 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3509B9B91819C3AE0093F714 /* CoreLocation.framework */; };
 		3509B9BC1819C61B0093F714 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3509B9BB1819C61B0093F714 /* CoreBluetooth.framework */; };
 		3509BA0F1819DB330093F714 /* libEasyLayoutLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3509BA071819D66B0093F714 /* libEasyLayoutLibrary.a */; };
@@ -93,8 +92,6 @@
 		3509B98F1819C0E70093F714 /* Vicinity-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vicinity-Prefix.pch"; sourceTree = "<group>"; };
 		3509B9901819C0E70093F714 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3509B9911819C0E70093F714 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3509B9991819C0E70093F714 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		3509B99A1819C0E70093F714 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		3509B9A31819C0E70093F714 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		3509B9B91819C3AE0093F714 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3509B9BB1819C61B0093F714 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -233,8 +230,6 @@
 				351FBBFF181EFC4200299A5A /* Util */,
 				351FBBFB181EFC0D00299A5A /* System */,
 				351FBBF1181AFC7E00299A5A /* Views */,
-				3509B9991819C0E70093F714 /* ViewController.h */,
-				3509B99A1819C0E70093F714 /* ViewController.m */,
 				351FBC49181F244A00299A5A /* FindDeviceViewController.h */,
 				351FBC4A181F244A00299A5A /* FindDeviceViewController.m */,
 			);
@@ -503,7 +498,6 @@
 				351FBC36181EFCAF00299A5A /* NSMutableDictionary+Ext.m in Sources */,
 				351FBC38181EFCAF00299A5A /* NSMutableArray+Ext.m in Sources */,
 				351FBC4B181F244A00299A5A /* FindDeviceViewController.m in Sources */,
-				3509B99B1819C0E70093F714 /* ViewController.m in Sources */,
 				351FBBFE181EFC3A00299A5A /* INBeaconService.m in Sources */,
 				3590AB651832D98A00CBAFB3 /* CBUUID+Ext.m in Sources */,
 			);
