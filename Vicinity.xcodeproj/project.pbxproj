@@ -14,7 +14,6 @@
 		3509B9921819C0E70093F714 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3509B9911819C0E70093F714 /* AppDelegate.m */; };
 		3509B9BA1819C3AE0093F714 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3509B9B91819C3AE0093F714 /* CoreLocation.framework */; };
 		3509B9BC1819C61B0093F714 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3509B9BB1819C61B0093F714 /* CoreBluetooth.framework */; };
-		3509BA0F1819DB330093F714 /* libEasyLayoutLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3509BA071819D66B0093F714 /* libEasyLayoutLibrary.a */; };
 		351FBBEC181AD15800299A5A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBBEA181AD15800299A5A /* Default-568h@2x.png */; };
 		351FBBF0181ADE9D00299A5A /* CLBeacon+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 351FBBEF181ADE9D00299A5A /* CLBeacon+Ext.m */; };
 		351FBBF4181AFC9C00299A5A /* ConsoleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 351FBBF3181AFC9C00299A5A /* ConsoleView.m */; };
@@ -50,6 +49,7 @@
 		351FBC5D1820434A00299A5A /* mode_button_broadcasting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC591820434A00299A5A /* mode_button_broadcasting@2x.png */; };
 		351FBC5E1820434A00299A5A /* mode_button_detecting.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC5A1820434A00299A5A /* mode_button_detecting.png */; };
 		351FBC5F1820434A00299A5A /* mode_button_detecting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 351FBC5B1820434A00299A5A /* mode_button_detecting@2x.png */; };
+		352774DC18778D3F001CC596 /* libEasyLayoutLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 352774D718778D2E001CC596 /* libEasyLayoutLibrary.a */; };
 		355B19D9182B082E00B71F7D /* CBPeripheralManager+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 355B19D8182B082E00B71F7D /* CBPeripheralManager+Ext.m */; };
 		356B50A51829972D00318DF1 /* BeaconCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 356B50A41829972D00318DF1 /* BeaconCircleView.m */; };
 		3590AB591832B29E00CBAFB3 /* CBCentralManager+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 3590AB581832B29E00CBAFB3 /* CBCentralManager+Ext.m */; };
@@ -59,23 +59,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3509BA061819D66B0093F714 /* PBXContainerItemProxy */ = {
+		352774D618778D2E001CC596 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3509BA011819D66B0093F714 /* EasyLayoutLibrary.xcodeproj */;
+			containerPortal = 352774D118778D2D001CC596 /* EasyLayoutLibrary.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 3509B9C61819CEC80093F714;
 			remoteInfo = EasyLayoutLibrary;
 		};
-		3509BA081819D66B0093F714 /* PBXContainerItemProxy */ = {
+		352774D818778D2E001CC596 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3509BA011819D66B0093F714 /* EasyLayoutLibrary.xcodeproj */;
+			containerPortal = 352774D118778D2D001CC596 /* EasyLayoutLibrary.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 3509B9D61819CEC80093F714;
 			remoteInfo = EasyLayoutLibraryTests;
 		};
-		3509BA0A1819D6830093F714 /* PBXContainerItemProxy */ = {
+		352774DA18778D39001CC596 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3509BA011819D66B0093F714 /* EasyLayoutLibrary.xcodeproj */;
+			containerPortal = 352774D118778D2D001CC596 /* EasyLayoutLibrary.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 3509B9C51819CEC80093F714;
 			remoteInfo = EasyLayoutLibrary;
@@ -95,7 +95,6 @@
 		3509B9A31819C0E70093F714 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		3509B9B91819C3AE0093F714 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3509B9BB1819C61B0093F714 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
-		3509BA011819D66B0093F714 /* EasyLayoutLibrary.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EasyLayoutLibrary.xcodeproj; path = ../EasyLayout/EasyLayoutLibrary.xcodeproj; sourceTree = "<group>"; };
 		351FBBEA181AD15800299A5A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Vicinity/Default-568h@2x.png"; sourceTree = "<group>"; };
 		351FBBEE181ADE9D00299A5A /* CLBeacon+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLBeacon+Ext.h"; sourceTree = "<group>"; };
 		351FBBEF181ADE9D00299A5A /* CLBeacon+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLBeacon+Ext.m"; sourceTree = "<group>"; };
@@ -156,6 +155,7 @@
 		351FBC591820434A00299A5A /* mode_button_broadcasting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mode_button_broadcasting@2x.png"; path = "Vicinity/mode_button_broadcasting@2x.png"; sourceTree = "<group>"; };
 		351FBC5A1820434A00299A5A /* mode_button_detecting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mode_button_detecting.png; path = Vicinity/mode_button_detecting.png; sourceTree = "<group>"; };
 		351FBC5B1820434A00299A5A /* mode_button_detecting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mode_button_detecting@2x.png"; path = "Vicinity/mode_button_detecting@2x.png"; sourceTree = "<group>"; };
+		352774D118778D2D001CC596 /* EasyLayoutLibrary.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EasyLayoutLibrary.xcodeproj; path = EasyLayout/EasyLayoutLibrary.xcodeproj; sourceTree = "<group>"; };
 		355B19D7182B082E00B71F7D /* CBPeripheralManager+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CBPeripheralManager+Ext.h"; sourceTree = "<group>"; };
 		355B19D8182B082E00B71F7D /* CBPeripheralManager+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBPeripheralManager+Ext.m"; sourceTree = "<group>"; };
 		356B50A31829972D00318DF1 /* BeaconCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconCircleView.h; sourceTree = "<group>"; };
@@ -175,7 +175,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3509BA0F1819DB330093F714 /* libEasyLayoutLibrary.a in Frameworks */,
+				352774DC18778D3F001CC596 /* libEasyLayoutLibrary.a in Frameworks */,
 				3509B9BC1819C61B0093F714 /* CoreBluetooth.framework in Frameworks */,
 				3509B9BA1819C3AE0093F714 /* CoreLocation.framework in Frameworks */,
 				3509B9841819C0E70093F714 /* CoreGraphics.framework in Frameworks */,
@@ -196,7 +196,7 @@
 				351FBC39181EFD7400299A5A /* 3rd Party */,
 				3509B9801819C0E70093F714 /* Frameworks */,
 				3509B97F1819C0E70093F714 /* Products */,
-				3509BA011819D66B0093F714 /* EasyLayoutLibrary.xcodeproj */,
+				352774D118778D2D001CC596 /* EasyLayoutLibrary.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -246,15 +246,6 @@
 			);
 			name = "Supporting Files";
 			path = Vicinity;
-			sourceTree = "<group>";
-		};
-		3509BA021819D66B0093F714 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3509BA071819D66B0093F714 /* libEasyLayoutLibrary.a */,
-				3509BA091819D66B0093F714 /* EasyLayoutLibraryTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		351FBBE7181AD13600299A5A /* Resources */ = {
@@ -370,6 +361,15 @@
 			path = Vicinity;
 			sourceTree = "<group>";
 		};
+		352774D218778D2D001CC596 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				352774D718778D2E001CC596 /* libEasyLayoutLibrary.a */,
+				352774D918778D2E001CC596 /* EasyLayoutLibraryTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -384,7 +384,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				3509BA0B1819D6830093F714 /* PBXTargetDependency */,
+				352774DB18778D39001CC596 /* PBXTargetDependency */,
 			);
 			name = Vicinity;
 			productName = Vicinity;
@@ -414,8 +414,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 3509BA021819D66B0093F714 /* Products */;
-					ProjectRef = 3509BA011819D66B0093F714 /* EasyLayoutLibrary.xcodeproj */;
+					ProductGroup = 352774D218778D2D001CC596 /* Products */;
+					ProjectRef = 352774D118778D2D001CC596 /* EasyLayoutLibrary.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -426,18 +426,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		3509BA071819D66B0093F714 /* libEasyLayoutLibrary.a */ = {
+		352774D718778D2E001CC596 /* libEasyLayoutLibrary.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libEasyLayoutLibrary.a;
-			remoteRef = 3509BA061819D66B0093F714 /* PBXContainerItemProxy */;
+			remoteRef = 352774D618778D2E001CC596 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		3509BA091819D66B0093F714 /* EasyLayoutLibraryTests.xctest */ = {
+		352774D918778D2E001CC596 /* EasyLayoutLibraryTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = EasyLayoutLibraryTests.xctest;
-			remoteRef = 3509BA081819D66B0093F714 /* PBXContainerItemProxy */;
+			remoteRef = 352774D818778D2E001CC596 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -506,10 +506,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3509BA0B1819D6830093F714 /* PBXTargetDependency */ = {
+		352774DB18778D39001CC596 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = EasyLayoutLibrary;
-			targetProxy = 3509BA0A1819D6830093F714 /* PBXContainerItemProxy */;
+			targetProxy = 352774DA18778D39001CC596 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

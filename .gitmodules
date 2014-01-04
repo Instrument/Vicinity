@@ -1,0 +1,3 @@
+[submodule "EasyLayout"]
+	path = EasyLayout
+	url = https://github.com/bentford/EasyLayout.git
